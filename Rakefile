@@ -6,12 +6,14 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "catpaws"
     gem.summary = %Q{CApistrano Tasks Pertaining to AWS}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.description = %Q{Capistrano tasks to make it easy to start and stop ec2 machines on which you can run subsequent tasks, transfer data to s3 and so on}
+    gem.files = ["lib/catpaws/common.rb","lib/catpaws/ec2.rb"]
     gem.email = "cassjohnston@gmail.com"
     gem.homepage = "http://github.com/cassj/catpaws"
     gem.authors = ["cassj"]
     gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.add_dependency('amazon-ec2', '>= 0')
+    gem.add_dependency('json', '>= 0')
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

@@ -1,6 +1,6 @@
 = catpaws
 
-Description goes here.
+CApistrano Tasks Pertaining to AWS
 
 == Note on Patches/Pull Requests
  
