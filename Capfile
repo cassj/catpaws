@@ -14,22 +14,13 @@ set :aws_access_key,  ENV['AMAZON_ACCESS_KEY']
 set :aws_secret_access_key , ENV['AMAZON_SECRET_ACCESS_KEY']
 set :ec2_url, ENV['EC2_URL']
 set :ssh_options, { :user => "ubuntu", }
+set :nhosts, 2
+set :status_file, '/home/ubuntu/catpaws_status.json'
 
 #define the master node as localhost. 
 role(:master, 'localhost')
 
 
-
-
-
-
-
-
-
-
-
-
-# groups
 
 # If you only want a single group you can define settings with just
 # set :group_name, "blah" and so on.
@@ -94,7 +85,6 @@ before "do_group_switch", "a","b", "set_group_testing"
 
 #example fetching the status file from an ec2 instance
 #not quite sure what to do with this. Should they be atts? 
-#will thing further tomorrow
 desc "status file test"
 task :stat_file, :roles=> :foo do
   instances = fetch :instances
@@ -126,3 +116,38 @@ task :run_script, :hosts => proc { return ["master"]} do
 end
 before "run_script", "set_group_testing", "EC2:start"
 
+
+
+
+# we've overridden find_servers_for_tasks to let you do something like:
+
+desc "long task test"
+task :long_task, :roles => :foo do
+
+  instances = fetch :instances
+  status_file = instances.status_file
+  tmp_status_file = status_file+'.tmp'
+
+  #fake a long run
+  sleep(10)
+
+  #note that we don't provide the ability to write to the file easily from here - it's deliberate - only
+  #the running job should be editing the file and it can do it in whatever language it is using
+
+  #install the perl json handler
+  sudo "apt-get install libjson-perl -y"
+
+  #slurp file contents, alter and spit them our again.
+  run %Q/ perl -0 -MJSON -p -e '$stat = from_json($_); $stat->{long_task_status}="COMPLETE"; $_ = to_json($stat, {pretty=>1});'  < #{status_file}  > #{tmp_status_file} /
+  run "mv #{tmp_status_file} #{status_file}"
+  
+end
+before :long_task, 'EC2:start'
+before :long_task, 'EC2:update_instance_status'
+
+desc "after long task test"
+task :long_task_wait, :roles => :foo, :long_task_status => 'COMPLETE' do
+  instances = fetch :instances
+  puts instances.status
+end
+before :long_task_wait, :long_task

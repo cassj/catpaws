@@ -44,7 +44,7 @@ module CaTPAWS
         @ssh_to_port       = params[:ssh_to_port] || 22
         @ssh_from_port     = params[:ssh_from_port] || 22
         @ssh_cidr_ip       = params[:ssh_cidr_ip] || '0.0.0.0/0'
-        @status_file       = params[:status_file] or raise  CaTPAWS::EC2::Error::MissingParameter, 'Please specify a status_file location for instances in this group'
+        @status_file       = params[:status_file] || '~/catpaws_status.json'
         @no_new            = params[:no_new] || false
 
         # create ec2 connection for this object
@@ -141,10 +141,9 @@ module CaTPAWS
         unless key_name().all?{|k| k == @key}
           raise CaTPAWS::EC2::Error::InstanceRetrieval, "Running instances in this group do not have key #{@key}"
         end
-
-
-        #initialise the status array
-        @status = []
+        
+        #initialize the @status array. Nothing in it just now.
+        @status = new Array(@instances.length)
 
       end #initalize
     
@@ -265,6 +264,19 @@ module CaTPAWS
         return @status_file
       end
       public :status_file
+
+#     #get currently cached instance statuses
+#     def status()
+#       return @status
+#     end
+#     public :status
+#     
+#     #set statuses
+#     def set_status(i, json)
+#       @status[i] = JSON.parse(json)
+#     end
+#     
+      
       
 
       #returns the array of instance metadata
@@ -272,27 +284,6 @@ module CaTPAWS
         return @instances
       end
       public :instances
-
-      
-      #can we auto-generate these methods?
-      #need a get, a set for the whole array
-      #a set for indices
-
-
-      #get currently cached instance statuses
-      def status()
-        return @status
-      end
-      public :status
-      
-      #set statuses
-      def set_status(stat)
-        @status = stat
-      end
-
-      
-      
-
 
       #getters for all the standard ec2-describe-instances info
       #all return an array of the relevant metadata ordered as per @instances

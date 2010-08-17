@@ -2,38 +2,6 @@ require '/space/cassj/catpaws/lib/catpaws/base/cap'
 require '/space/cassj/catpaws/lib/catpaws/ec2/catpaws'
 
 
-#We need to override the find_servers_for_task to include an option to wait for servers to be ready
-#so we can kick off long jobs and let them background
-module Capistrano
-  class Configuration
-    module Servers
-
-      def find_servers_for_task(task, options={})
-              
-        attempts  = options[:attempts].to_i || 1
-        wait_time = options[:wait_time].to_i || 10
-        options.delete(:attempts)
-        options.delete(:wait_time)
-        
-        servers = find_servers(task.options.merge(options))
-        attempt = 1
-
-        while(servers.length == 0 && attempt <= attempts)
-          wait(wait_time)
-          servers = find_servers(task.options.merge(options))
-          attempts += 1
-        end
-        
-        return servers
-
-      end
-
-    end
-  end
-end
-
-
-
 Capistrano::Configuration.instance(:must_exist).load do
 
   # default to EU West.
@@ -66,7 +34,6 @@ Capistrano::Configuration.instance(:must_exist).load do
 
   end
     
-
   namespace :EC2 do 
     
     desc 'Start a group of EC2 images'
@@ -84,7 +51,6 @@ Capistrano::Configuration.instance(:must_exist).load do
       ssh_to_port       = variables[:ssh_to_port] || 22
       ssh_from_port     = variables[:ssh_from_port] || 22
       ssh_cidr_ip       = variables[:ssh_cidr_ip] || '0.0.0.0/0'
-      status_file       = variables[:status_file] or abort "no status file defined"
       
 
       #create a CaTPAWS::EC2::Instances object for the group we want.
@@ -98,8 +64,7 @@ Capistrano::Configuration.instance(:must_exist).load do
                                               :key_file          => key_file,
                                               :nhosts            => nhosts,
                                               :access_key        => aws_access_key,
-                                              :secret_access_key => aws_secret_access_key,
-                                              :status_file       => status_file
+                                              :secret_access_key => aws_secret_access_key
                                               )
       
 
@@ -123,7 +88,7 @@ Capistrano::Configuration.instance(:must_exist).load do
 
       #just wait a sec for the server to do boot stuff. Seems to fail sometimes if not.
       sleep(5)
-      
+ 
       #create the status file on each of the instances unless it already exists.
       #this is basically just a json file in which you can dump whatever metadata 
       #you like for your task. catpaws will use it for keeping track of running jobs,
@@ -150,7 +115,6 @@ Capistrano::Configuration.instance(:must_exist).load do
       ssh_to_port       = variables[:ssh_to_port] || 22
       ssh_from_port     = variables[:ssh_from_port] || 22
       ssh_cidr_ip       = variables[:ssh_cidr_ip] || '0.0.0.0/0'
-      status_file       = variables[:status_file] or abort "no status file defined"
       
       
       #create a CaTPAWS::EC2::Instances object for the group we want.
@@ -166,7 +130,6 @@ Capistrano::Configuration.instance(:must_exist).load do
                                                 :nhosts            => nhosts,
                                                 :access_key        => aws_access_key,
                                                 :secret_access_key => aws_secret_access_key,
-                                                :status_file       => status_file,
                                                 :no_new            => true
                                                 )
         
@@ -176,10 +139,10 @@ Capistrano::Configuration.instance(:must_exist).load do
         #remove the role associated with this instance group
         #note that according to the docs this is read only, so we probably shouldn't
         #be doing this.
-        roles.delete(group_name.intern)
+        roles.delete(@group_name)
         
         puts "instances shutdown"
-
+        
       rescue AWS::InvalidGroupNotFound
         #task should be idempotent. If group isn't found, it's probably because the task has already run once
         #only panic if we still have the correponding cap role
@@ -189,36 +152,17 @@ Capistrano::Configuration.instance(:must_exist).load do
       end
       
     end #stop
-    
 
-    desc 'update instance statuses'
-    task :update_instance_status, roles => :master do
-      instances = fetch :instances
-      status_file = instances.status_file
-      
-      group_name = variables[:group_name] or abort "No group_name set in config or task parameters"
-
-      # roles is supposed to be read only but this seems to work for now.
-      roles.delete( group_name.intern )
-      
-      stats = []
-      (1..instances.id.length).to_a.each{|i|
-        server = instances.dns_name[i-1]
-        json = capture( "cat #{status_file}", :hosts=> server )
-        stats[i-1] = ( json == "" )  ? json : JSON.parse(json) 
-        
-        #add this status info to the role attributes for this server
-        set_role({
-                   :role_name   => group_name.intern, 
-                   :server_list => server,
-                   :attributes  => stats[i-1]
-                 })
-      }
-      instances.set_status(stats)
-    end
-    before 'EC2:udpate_instance_status', 'EC2:start'
-
-    
+#    desc 'update instance statuses'
+#    task :poll_instances, roles => :master do
+#      instances = fetch :instances
+#      puts instances
+#      status_file = instances.status_file
+#      
+#      status = JSON.parse(capture("cat #{status_file}"))
+#
+#    end
+#    before 'EC2:poll_instances', 'EC2:start'
 
   end #namespace EC2
 
