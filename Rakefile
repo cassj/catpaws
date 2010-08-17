@@ -7,7 +7,7 @@ begin
     gem.name = "catpaws"
     gem.summary = %Q{CApistrano Tasks Pertaining to AWS}
     gem.description = %Q{Capistrano tasks to make it easy to start and stop ec2 machines on which you can run subsequent tasks, transfer data to s3 and so on}
-    gem.files = ["lib/catpaws/common.rb","lib/catpaws/ec2.rb"]
+    gem.files = ["lib/catpaws.rb", "lib/catpaws/base.rb", "lib/catpaws/base/catpaws.rb", "lib/catpaws/base/cap.rb", "lib/catpaws/ec2.rb", "lib/catpaws/ec2/catpaws.rb", "lib/catpaws/ec2/cap.rb"]
     gem.email = "cassjohnston@gmail.com"
     gem.homepage = "http://github.com/cassj/catpaws"
     gem.authors = ["cassj"]

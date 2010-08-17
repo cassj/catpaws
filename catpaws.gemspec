@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["cassj"]
-  s.date = %q{2010-08-04}
+  s.date = %q{2010-08-10}
   s.description = %q{Capistrano tasks to make it easy to start and stop ec2 machines on which you can run subsequent tasks, transfer data to s3 and so on}
   s.email = %q{cassjohnston@gmail.com}
   s.extra_rdoc_files = [
@@ -17,8 +17,13 @@ Gem::Specification.new do |s|
      "README.rdoc"
   ]
   s.files = [
-    "lib/catpaws/common.rb",
-     "lib/catpaws/ec2.rb"
+    "lib/catpaws.rb",
+     "lib/catpaws/base.rb",
+     "lib/catpaws/base/cap.rb",
+     "lib/catpaws/base/catpaws.rb",
+     "lib/catpaws/ec2.rb",
+     "lib/catpaws/ec2/cap.rb",
+     "lib/catpaws/ec2/catpaws.rb"
   ]
   s.homepage = %q{http://github.com/cassj/catpaws}
   s.rdoc_options = ["--charset=UTF-8"]
