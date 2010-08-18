@@ -66,9 +66,13 @@ Capistrano::Configuration.instance(:must_exist).load do
 
   end
     
-
+  # these are basically fake tasks, they don't involve any communication with a remote server, they just run
+  # stuff on localhost, but if we make them tasks, we can say before 'sometask', 'EC2:start' and so on
   namespace :EC2 do 
-    
+   
+    # start will start a group of EC2 images, or will retrieve the group if it already exists and do some quick
+    # sanity checks on them to make sure they are the images you want.
+    # it then creates a CaTPAWS::EC2::Instances object from them and puts it in the cap variable :instances 
     desc 'Start a group of EC2 images'
     task :start, :roles => :master do
 
@@ -117,19 +121,13 @@ Capistrano::Configuration.instance(:must_exist).load do
     after 'EC2:start', 'EC2:status_setup'
 
 
-    #why is this failing just sometimes?
+    # this runs on each of the ec2 instances, creating a status file if one doesn't exist
+    # this is a json file that can be used by tasks running on the server to pass info back.
     task :status_setup, :roles => proc{fetch :group_name} do
       instances = fetch :instances
 
       #just wait a sec for the server to do boot stuff. Seems to fail sometimes if not.
       sleep(5)
-      
-      #create the status file on each of the instances unless it already exists.
-      #this is basically just a json file in which you can dump whatever metadata 
-      #you like for your task. catpaws will use it for keeping track of running jobs,
-      #but you can add your own stuff too. Top level structure must be a hash, but 
-      #below that, whatever data structure you like.
-      #it should be empty if there is no task running on this instance.
       status_file = instances.status_file
       run "touch #{status_file}"
       
@@ -190,6 +188,13 @@ Capistrano::Configuration.instance(:must_exist).load do
       
     end #stop
     
+
+    # this will fetch the current status from each of the ec2 instances and update the capistano
+    # instances variable accordingly. Note that this is *read only*. Only the task running on the
+    # remote machine can change the status file.  
+    # At the moment, there should only be one task running on a server at a time. I may try and 
+    # implement something a bit more flexible to allow multiple tasks to run on a server at some point
+    # but for now, I figure you probably don't e
 
     desc 'update instance statuses'
     task :update_instance_status, roles => :master do
