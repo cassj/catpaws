@@ -2,15 +2,37 @@
 
 CApistrano Tasks Pertaining to AWS
 
-== Note on Patches/Pull Requests
- 
-* Fork the project.
-* Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
+I know there are other cap gems to do EC2-related stuff, but they (and Cap, to be fair) tend to 
+focus on deployment and Rails stuff. I'm using cap  to run (in my case bioinformatics) workflows,  
+and catpaws lets me boot EC2 images as needed and sending tasks to them. 
+The plan is that by putting data online,  scripts in a repository somewhere, and saving EC2 images 
+with the necessary software (or including tasks to install them) I can just publish a Capfile 
+with a paper and anyone with an EC2 account can play about with it. Once this is working, I might 
+have a go at a Cap plugin to let tasks define metadata, like parameters passed to script etc, 
+ami used, and have this stuff spat out in some kind of workflow ontology? 
+
+
+== EC2
+
+Built on top of the amazon-ec2 gem.
+
+Tasks for starting and stopping EC2 instances and mapping security groups to capistrano roles. 
+
+Tasks for retrieving status file from instances and adding status key-value pairs to a servers 
+attributes. 
+
+Overidden find_servers_for_task to check server status and wait if we don't find any servers and 
+to make a specified number of attempts.
+
+Plan to add tasks for packaging up servers to amis  etc
+
+
+
+== Example
+
+Have a look at the Capfile to see some examples of what it can do at the moment (which isn't
+very much yet ;) )
+
 
 == Copyright
 

@@ -1,3 +1,3 @@
-require '/space/cassj/catpaws/lib/catpaws/base/catpaws'
-require '/space/cassj/catpaws/lib/catpaws/base/cap'
+require 'catpaws/base/catpaws'
+require 'catpaws/base/cap'
 

@@ -1,5 +1,5 @@
-require '/space/cassj/catpaws/lib/catpaws/base/cap'
-require '/space/cassj/catpaws/lib/catpaws/ec2/catpaws'
+require 'catpaws/base/cap'
+require 'catpaws/ec2/catpaws'
 
 
 #We need to override the find_servers_for_task to include an option to wait for servers to be ready

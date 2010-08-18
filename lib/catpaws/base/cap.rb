@@ -1,4 +1,4 @@
-require('/space/cassj/catpaws/lib/catpaws/base/catpaws')
+require('catpaws/base/catpaws')
 require('pp')
 
 # include the CaTPAWS module in Cap config  

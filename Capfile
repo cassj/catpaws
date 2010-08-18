@@ -145,6 +145,10 @@ end
 before :long_task, 'EC2:start'
 before :long_task, 'EC2:update_instance_status'
 
+
+#if we cal this, it'll call long task and wait unti it has run 
+#but I think it'll only wait until it's run on a single machine - need
+#to make find_server_for_tasks smarter.
 desc "after long task test"
 task :long_task_wait, :roles => :foo, :long_task_status => 'COMPLETE' do
   instances = fetch :instances
