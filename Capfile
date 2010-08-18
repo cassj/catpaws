@@ -1,8 +1,8 @@
 ###
 # An example Capfile using catpaws
 
-require '/space/cassj/catpaws/lib/catpaws/ec2'
-
+#require '/space/cassj/catpaws/lib/catpaws/ec2'
+require 'catpaws/ec2'
 
 # config for catpaws
 
