@@ -45,6 +45,7 @@ module CaTPAWS
         @ssh_from_port     = params[:ssh_from_port] || 22
         @ssh_cidr_ip       = params[:ssh_cidr_ip] || '0.0.0.0/0'
         @status_file       = params[:status_file] or raise  CaTPAWS::EC2::Error::MissingParameter, 'Please specify a status_file location for instances in this group'
+        @working_dir       = params[:working_dir] or raise CaTPAWS::EC2::Error::MissingParameter, 'Please specify a working_dir'
         @no_new            = params[:no_new] || false
 
         puts @ec2_url
@@ -71,7 +72,7 @@ module CaTPAWS
                             :to_port     => @ssh_to_port,
                             :cidr_ip     => @ssh_cidr_ip
                             )
-            
+        
             #start required instances.
             @ec2.run_instances(
                                :image_id       => @ami, 
@@ -268,6 +269,12 @@ module CaTPAWS
       end
       public :status_file
       
+      def working_dir()
+         return @working_dir
+      end
+      public :working_dir
+
+
 
       #returns the array of instance metadata
       def instances()

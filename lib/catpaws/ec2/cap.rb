@@ -86,6 +86,8 @@ Capistrano::Configuration.instance(:must_exist).load do
       ssh_cidr_ip       = variables[:ssh_cidr_ip] || '0.0.0.0/0'
       status_file       = variables[:status_file] or abort "no status file defined"
       ec2_url           = variables[:ec2_url] or abort "no ec2_url defined"
+      working_dir       = variables[:working_dir] or abort 'No working_dir defined'
+
 
       #create a CaTPAWS::EC2::Instances object for the group we want.
       #if the group already exists, it'll check 
@@ -100,7 +102,8 @@ Capistrano::Configuration.instance(:must_exist).load do
                                               :access_key        => aws_access_key,
                                               :secret_access_key => aws_secret_access_key,
                                               :status_file       => status_file,
-                                              :ec2_url           => ec2_url
+                                              :ec2_url           => ec2_url,
+                                              :working_dir       => working_dir
                                               )
       
 
@@ -131,9 +134,15 @@ Capistrano::Configuration.instance(:must_exist).load do
       #but you can add your own stuff too. Top level structure must be a hash, but 
       #below that, whatever data structure you like.
       #it should be empty if there is no task running on this instance.
+       
+      user = variables[:ssh_options][:user]
       status_file = instances.status_file
+      working_dir = instances.working_dir
+
+      sudo "mkdir -p #{working_dir}"
+      sudo "chown -R #{user} #{working_dir}"
       run "touch #{status_file}"
-      
+
     end
 
 
@@ -152,7 +161,8 @@ Capistrano::Configuration.instance(:must_exist).load do
       ssh_from_port     = variables[:ssh_from_port] || 22
       ssh_cidr_ip       = variables[:ssh_cidr_ip] || '0.0.0.0/0'
       status_file       = variables[:status_file] or abort "no status file defined"
-      
+      working_dir       = variables[:working_dir] or abort 'No working_dir defined'
+ 
       
       #create a CaTPAWS::EC2::Instances object for the group we want.
       #use no_new so we don't start new stuff if nothing is running
@@ -168,7 +178,8 @@ Capistrano::Configuration.instance(:must_exist).load do
                                                 :access_key        => aws_access_key,
                                                 :secret_access_key => aws_secret_access_key,
                                                 :status_file       => status_file,
-                                                :no_new            => true
+                                                :no_new            => true,
+                                                :working_dir       => working_dir
                                                 )
         
         #shutdown the instances
