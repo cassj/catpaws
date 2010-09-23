@@ -47,6 +47,8 @@ module CaTPAWS
         @status_file       = params[:status_file] or raise  CaTPAWS::EC2::Error::MissingParameter, 'Please specify a status_file location for instances in this group'
         @no_new            = params[:no_new] || false
 
+        puts @ec2_url
+
         # create ec2 connection for this object
         @ec2 = AWS::EC2::Base.new( :access_key_id     => @access_key,
                                    :secret_access_key => @secret_access_key,

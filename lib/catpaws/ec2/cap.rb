@@ -85,7 +85,7 @@ Capistrano::Configuration.instance(:must_exist).load do
       ssh_from_port     = variables[:ssh_from_port] || 22
       ssh_cidr_ip       = variables[:ssh_cidr_ip] || '0.0.0.0/0'
       status_file       = variables[:status_file] or abort "no status file defined"
-      
+      ec2_url           = variables[:ec2_url] or abort "no ec2_url defined"
 
       #create a CaTPAWS::EC2::Instances object for the group we want.
       #if the group already exists, it'll check 
@@ -99,7 +99,8 @@ Capistrano::Configuration.instance(:must_exist).load do
                                               :nhosts            => nhosts,
                                               :access_key        => aws_access_key,
                                               :secret_access_key => aws_secret_access_key,
-                                              :status_file       => status_file
+                                              :status_file       => status_file,
+                                              :ec2_url           => ec2_url
                                               )
       
 
