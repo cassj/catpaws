@@ -113,7 +113,7 @@ module CaTPAWS
               raise CaTPAWS::EC2::Error::InstanceStartup, "Instances still pending after a long wait. Check your EC2 account manually?"
             end
             puts "Pending instances, please wait..."
-            sleep(10)
+            sleep(30)
             attempts+=1
             get_instances()
             stats = state_code()

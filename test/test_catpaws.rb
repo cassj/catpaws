@@ -6,7 +6,8 @@ class TestCatpaws < Test::Unit::TestCase
     instances = CaTPAWS::EC2::Instances.new(
                                             :group_name        => 'testing',
                                             :group_description => 'this is a test',
-                                            :ami               => 'ami-cf4d67bb',
+#                                            :ami               => 'ami-cf4d67bb',
+                                            :ami               => 'emi-0243110F',
                                             :instance_type     => 'm1.small',
                                             :key               => ENV['EC2_KEY'],
                                             :key_file          => ENV['EC2_KEYFILE'],
