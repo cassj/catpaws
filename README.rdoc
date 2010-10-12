@@ -12,7 +12,7 @@ Built on top of the right_aws gem.
 
 Currently provides EC2:start and EC2:stop tasks and little else
 
-Let's you start multiple instances and maps EC2 security groups to 
+Lets you start multiple instances and maps EC2 security groups to 
 Capistrano roles.
 
 Plan to add tasks for packaging up servers to amis  etc
