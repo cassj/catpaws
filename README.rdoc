@@ -40,11 +40,48 @@ Plan to add tasks for packaging up servers to amis  etc
  set :group_name, 'testing'
 
  desc "setup apt on all instances"
- task apt_setup, :roles => group_name do
+ task :apt_setup, :roles => group_name do
    sudo "apt-get update"
    sudo "apt-get install -y build_essential"  
  end 
+ before 'apt_setup', 'EC2:start' 
 
+== Installation
+
+You will need an AWS EC2 account to use the Capfiles
+Please see http://aws.amazon.com/ec2/ 
+Make sure you have create an ssh key in order to access EC2 instances
+
+To use EC2:start and stop in your Capfiles, you will need to have the following installed:
+
+git:        http://git-scm.com/
+ruby:       http://ruby-lang.org/
+RubyGems:   http://rubygems.org/
+ 
+Install the gems you need with:
+
+ sudo gem install capistrano
+ sudo gem install amazon-ec2
+ sudo gem install json
+
+Get the catpaws gem from github and build it
+
+ git clone git@github.com:cassj/catpaws.git
+ cd catpaws
+ rake gemspec
+ rake build
+ sudo gem install pkg/catpaws-*.gem
+ 
+
+Finally, set the following environment variables appropriately
+for your AWS account:
+
+ AMAZON_ACCESS_KEY
+ AMAZON_SECRET_ACCESS_KEY
+ EC2_URL ( defaults to eu-west-1.ec2.amazonaws.com)
+ EC2_KEY ( the name of the key registered with EC2, with which you will access your instances )
+ EC2_KEYFILE ( the location of the key file. Alternatively, you can use ssh-agent )
+ 
 
 
 == Copyright
