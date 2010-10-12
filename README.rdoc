@@ -48,14 +48,16 @@ Plan to add tasks for packaging up servers to amis  etc
 
 == Installation
 
-You will need an AWS EC2 account to use the Capfiles
-Please see http://aws.amazon.com/ec2/ 
-Make sure you have create an ssh key in order to access EC2 instances
+You will need an AWS EC2 account - see http://aws.amazon.com/ec2/ (or compatible cloud infrastructure,  it should work on Eucalyptus)
+  
+Make sure you have create an ssh key in order to access your instances
 
 To use EC2:start and stop in your Capfiles, you will need to have the following installed:
 
 git:        http://git-scm.com/
+
 ruby:       http://ruby-lang.org/
+
 RubyGems:   http://rubygems.org/
  
 Install the gems you need with:
