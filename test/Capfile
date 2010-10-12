@@ -1,0 +1,125 @@
+###
+# An example Capfile using catpaws
+
+# Note - this isn't really what Capistrano was designed for
+# so it's all a bit of a kludge. One of these days I'll get around to 
+# writing a data analysis workflow tool that can do this stuff 
+
+# search ../lib for stuff
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+
+require 'catpaws'
+
+# config for catpaws
+
+# using set :variable_name will set the value permanently
+# using set_default :variable_name will let you override the 
+# value using -S variable_name=value when you call a task
+
+set :aws_access_key,  ENV['AMAZON_ACCESS_KEY']
+set :aws_secret_access_key , ENV['AMAZON_SECRET_ACCESS_KEY']
+set :ec2_url, ENV['EC2_URL']
+set :ssh_options, { :user => "ubuntu", }
+set :nhosts, 1
+
+# defaults to wherever you are when you log in (so ~/ usually)
+#set :working_dir, '/mnt/testing'
+#set :git_url, 'git@github.com:cassj/catpaws.git'
+
+# define the master node as localhost. 
+role(:master, 'localhost')
+
+# if you're using a single group, just set these values globally.
+set :key, ENV['EC2_KEY']
+set :key_file, ENV['EC2_KEYFILE']
+set :ami, 'ami-cf4d67bb' 
+set :instance_type, 'm1.small'
+set :group_name, 'testing'
+
+
+# If you need multiple groups, wrap their settings in a task and use
+# "before" to set groups appropriately per task
+task :set_group_testing, :roles => :master do
+  set :key,  ENV['EC2_KEY']
+  set :key_file, ENV['EC2_KEYFILE']
+  set :ami, 'ami-cf4d67bb' 
+  set :instance_type, 'm1.small'
+  set :group_name, 'testing'
+  set :nhosts, 1
+  set :ssh_options, { :user => "ubuntu", }
+end
+
+task :set_group_foo, :roles => :master do
+  set :key,  ENV['EC2_KEY']
+  set :key_file, ENV['EC2_KEYFILE']
+  set :ami, 'ami-cf4d67bb' 
+  set :instance_type, 'm1.small'
+  set :group_name, 'foo'
+  set :nhosts, 1
+  set :ssh_options, { :user => "ubuntu", }
+end
+
+
+
+# example group switching tasks:
+task :a, :roles => :master do
+  puts "in a"
+  gn = fetch :group_name
+  puts  "group "+gn
+end 
+before "a", "set_group_testing"
+
+task :b, :roles => :master do
+  puts "in b"
+  gn = fetch :group_name
+  puts "group "+ gn
+end
+before "b", "set_group_foo"
+
+desc "a task to show group switching"
+task :do_group_switch, :roles => :master do
+  puts "in do_group_switch"
+  gn = fetch :group_name
+  puts "group "+gn
+end 
+before "do_group_switch", "a","b", "set_group_testing" 
+
+
+
+
+
+
+# I've overridden find_servers_for_tasks to let you do something like:
+
+desc "long task test"
+task :long_task, :roles => :foo do
+
+  instances = fetch :instances
+  status_file = instances.status_file
+  tmp_status_file = status_file+'.tmp'
+
+  #fake a long run
+  sleep(10)
+
+  #install the perl json handler
+  sudo "apt-get install libjson-perl -y"
+
+  #slurp file contents, alter and spit them our again.
+  run %Q/ perl -0 -MJSON -p -e '$stat = from_json($_); $stat->{long_task_status}="COMPLETE"; $_ = to_json($stat, {pretty=>1});'  < #{status_file}  > #{tmp_status_file} /
+  run "mv #{tmp_status_file} #{status_file}"
+  
+end
+before :long_task, 'EC2:start'
+before :long_task, 'EC2:update_instance_status'
+
+
+# if we call this, it'll call long task and wait unti it has run 
+# but I think it'll only wait until it's run on a single machine - need
+# to make find_server_for_tasks smarter.
+desc "after long task test"
+task :long_task_wait, :roles => :foo, :long_task_status => 'COMPLETE' do
+  instances = fetch :instances
+  puts instances.status
+end
+before :long_task_wait, :long_task

@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'fileutils'
-require 'AWS'
+require 'right_aws'
 require 'json'
 require 'uri'
 

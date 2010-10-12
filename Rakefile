@@ -17,10 +17,10 @@ begin
     gem.email = "cassjohnston@gmail.com"
     gem.homepage = "http://github.com/cassj/catpaws"
     gem.authors = ["cassj"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    gem.add_dependency('capistrano', '>= 2')
-    gem.add_dependency('amazon-ec2', '>= 0')
-    gem.add_dependency('json', '>= 0')
+    gem.add_development_dependency "thoughtbot-shoulda"
+    gem.add_dependency 'capistrano'
+    gem.add_dependency 'right_aws'
+    gem.add_dependency 'json'
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
