@@ -21,29 +21,29 @@ Plan to add tasks for packaging up servers to amis  etc
 
 == Example Capfile
 
-require 'catpaws'
+ require 'catpaws'
 
-set :aws_access_key,  ENV['AMAZON_ACCESS_KEY']
-set :aws_secret_access_key , ENV['AMAZON_SECRET_ACCESS_KEY']
-set :ec2_url, ENV['EC2_URL']
-set :ssh_options, { 
+ set :aws_access_key,  ENV['AMAZON_ACCESS_KEY']
+ set :aws_secret_access_key , ENV['AMAZON_SECRET_ACCESS_KEY']
+ set :ec2_url, ENV['EC2_URL']
+ set :ssh_options, { 
                     :keys => [ENV['EC2_KEYFILE']],
                     :user => "ubuntu" }
-set :sudo_password, ''
-set :nhosts, 3 
-set :working_dir, '/mnt/testing'
+ set :sudo_password, ''
+ set :nhosts, 3 
+ set :working_dir, '/mnt/testing'
 
-set :key, ENV['EC2_KEY']
-set :key_file, ENV['EC2_KEYFILE']
-set :ami, 'ami-cf4d67bb' 
-set :instance_type, 'm1.small'
-set :group_name, 'testing'
+ set :key, ENV['EC2_KEY']
+ set :key_file, ENV['EC2_KEYFILE']
+ set :ami, 'ami-cf4d67bb' 
+ set :instance_type, 'm1.small'
+ set :group_name, 'testing'
 
-desc "setup apt on all instances"
-task apt_setup, :roles => group_name do
-  sudo "apt-get update"
-  sudo "apt-get install -y build_essential"  
-end 
+ desc "setup apt on all instances"
+ task apt_setup, :roles => group_name do
+   sudo "apt-get update"
+   sudo "apt-get install -y build_essential"  
+ end 
 
 
 
