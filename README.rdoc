@@ -1,37 +1,50 @@
 = catpaws
 
-CApistrano Tasks Pertaining to AWS
+CApistrano Tasks Providing AWS
 
-I know there are other cap gems to do EC2-related stuff, but they (and Cap, to be fair) tend to 
-focus on deployment and Rails stuff. I'm using cap  to run (in my case bioinformatics) workflows,  
-and catpaws lets me boot EC2 images as needed and sending tasks to them. 
-The plan is that by putting data online,  scripts in a repository somewhere, and saving EC2 images 
-with the necessary software (or including tasks to install them) I can just publish a Capfile 
-with a paper and anyone with an EC2 account can play about with it. Once this is working, I might 
-have a go at a Cap plugin to let tasks define metadata, like parameters passed to script etc, 
-ami used, and have this stuff spat out in some kind of workflow ontology? 
+I'm using Capistrano to manage remote machines when running data analysis workflows. 
+This isn't quite what Capistrano was designed for, so it's all a bit hacky.
 
 
 == EC2
 
-Built on top of the amazon-ec2 gem.
+Built on top of the right_aws gem.
 
-Tasks for starting and stopping EC2 instances and mapping security groups to capistrano roles. 
+Currently provides EC2:start and EC2:stop tasks and little else
 
-Tasks for retrieving status file from instances and adding status key-value pairs to a servers 
-attributes. 
-
-Overidden find_servers_for_task to check server status and wait if we don't find any servers and 
-to make a specified number of attempts.
+Let's you start multiple instances and maps EC2 security groups to 
+Capistrano roles.
 
 Plan to add tasks for packaging up servers to amis  etc
 
 
 
-== Example
+== Example Capfile
 
-Have a look at the Capfile to see some examples of what it can do at the moment (which isn't
-very much yet ;) )
+require 'catpaws'
+
+set :aws_access_key,  ENV['AMAZON_ACCESS_KEY']
+set :aws_secret_access_key , ENV['AMAZON_SECRET_ACCESS_KEY']
+set :ec2_url, ENV['EC2_URL']
+set :ssh_options, { 
+                    :keys => [ENV['EC2_KEYFILE']],
+                    :user => "ubuntu" }
+set :sudo_password, ''
+set :nhosts, 3 
+set :working_dir, '/mnt/testing'
+
+set :key, ENV['EC2_KEY']
+set :key_file, ENV['EC2_KEYFILE']
+set :ami, 'ami-cf4d67bb' 
+set :instance_type, 'm1.small'
+set :group_name, 'testing'
+
+desc "setup apt on all instances"
+task apt_setup, :roles => group_name do
+  sudo "apt-get update"
+  sudo "apt-get install -y build_essential"  
+end 
+
 
 
 == Copyright
