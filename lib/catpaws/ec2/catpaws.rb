@@ -105,11 +105,11 @@ module CaTPAWS
         get_instances()
 
         unless (@no_new)
-          # wait for any pending for a couple of minutes
+          # wait for any pending for up to 5 mins
           attempts = 0
           stats = state_code()
           while (stats.any? {|s| s==0 }) do
-            if attempts > 6 
+            if attempts >  10
               raise CaTPAWS::EC2::Error::InstanceStartup, "Instances still pending after a long wait. Check your EC2 account manually?"
             end
             puts "Pending instances, please wait..."
