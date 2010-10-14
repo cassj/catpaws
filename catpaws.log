@@ -1,0 +1,156 @@
+# Logfile created on 2010-10-14 14:03:58 +0100 by logger.rb/20321
+I, [2010-10-14T14:03:58.599173 #4087]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:03:58.600134 #4087]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T14:03:59.473921 #4087]  INFO -- : Launching instance of image ami-cf4d67bb for 16F5AHH5HWR243WSNMR2, key: cassj, groups: testing
+I, [2010-10-14T14:10:28.593513 #4470]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:10:28.594684 #4470]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T14:10:29.367730 #4470]  INFO -- : Launching instance of image ami-cf4d67bb for 16F5AHH5HWR243WSNMR2, key: cassj, groups: testing
+I, [2010-10-14T14:28:04.682126 #5180]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:28:04.682921 #5180]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T14:28:06.233031 #5180]  INFO -- : Launching instance of image ami-cf4d67bb for 16F5AHH5HWR243WSNMR2, key: cassj, groups: testing
+I, [2010-10-14T14:37:15.172519 #5654]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:37:15.173731 #5654]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T14:37:15.471565 #5654]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>26f5d3ef-c1c7-48d9-8ec9-9247a1bb8e46</RequestID></Response> #####
+W, [2010-10-14T14:37:15.471709 #5654]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T13%3A37%3A15.000Z&Version=2009-08-15&Signature=FlAyye7XAVle9KUqtllgGiw4q1Q0VImEJ8HlEpsiLns%3D ####
+I, [2010-10-14T14:38:26.210418 #5712]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:38:26.211484 #5712]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T14:38:26.341403 #5712]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>77240826-fa52-436a-8b27-22774ee02865</RequestID></Response> #####
+W, [2010-10-14T14:38:26.341541 #5712]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T13%3A38%3A26.000Z&Version=2009-08-15&Signature=LGSn49s4xlPNrjk2H292Cek%2BG24ec9jm3WRi9sltClY%3D ####
+I, [2010-10-14T14:40:25.964006 #5812]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:40:25.965187 #5812]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T14:40:26.101912 #5812]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>0b8092cd-1630-47da-bda4-6a35da2c778d</RequestID></Response> #####
+W, [2010-10-14T14:40:26.101994 #5812]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T13%3A40%3A25.000Z&Version=2009-08-15&Signature=t7v%2Fxh7Ph1qTj6hl4TEUqkdUADhBTBQh1Rm6jp%2Fpn0E%3D ####
+I, [2010-10-14T14:41:22.456568 #5871]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:41:22.457314 #5871]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T14:41:22.578819 #5871]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>b90486f7-56c2-4c6d-8d61-d141225e6af5</RequestID></Response> #####
+W, [2010-10-14T14:41:22.578870 #5871]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T13%3A41%3A22.000Z&Version=2009-08-15&Signature=M9kRe1aehS8GvLeX7vVnpMuS46ePHiCCcoGxRAqHUIY%3D ####
+I, [2010-10-14T14:41:22.581493 #5871]  INFO -- : Closing HTTPS connection to eu-west-1.ec2.amazonaws.com:443, reason: 'Aws::AWSErrorHandler: code: 400: 'Bad Request', probability: 10%'
+I, [2010-10-14T14:41:22.582102 #5871]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T14:41:39.823689 #5897]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:41:39.824676 #5897]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T14:41:39.949180 #5897]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>8a6e74df-f016-4d8d-97ca-043f17c7906c</RequestID></Response> #####
+W, [2010-10-14T14:41:39.949383 #5897]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T13%3A41%3A39.000Z&Version=2009-08-15&Signature=HrltfyqdGIjjl31TjJvl8e%2BxEre4GKGFLsMJM3lr1aQ%3D ####
+I, [2010-10-14T14:41:50.779932 #5936]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:41:50.781011 #5936]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T14:41:50.908983 #5936]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>b1f36249-9751-4468-86d4-737b93894098</RequestID></Response> #####
+W, [2010-10-14T14:41:50.909054 #5936]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T13%3A41%3A50.000Z&Version=2009-08-15&Signature=N57ni903qmlYvxrKEZdMR%2FDKoJ7Ab2ng3SR4Tg46iqI%3D ####
+I, [2010-10-14T14:41:50.912745 #5936]  INFO -- : Closing HTTPS connection to eu-west-1.ec2.amazonaws.com:443, reason: 'Aws::AWSErrorHandler: code: 400: 'Bad Request', probability: 10%'
+I, [2010-10-14T14:41:50.913639 #5936]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T14:42:00.181927 #5965]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:42:00.182660 #5965]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T14:42:00.307777 #5965]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>7739862b-9b84-4d3f-be4b-efe355ffeb1e</RequestID></Response> #####
+W, [2010-10-14T14:42:00.307851 #5965]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T13%3A42%3A00.000Z&Version=2009-08-15&Signature=MYjHAQcsuGdYL1NbCIT8kd5OdPO%2FHscnR8EV376dkDI%3D ####
+I, [2010-10-14T14:42:13.130099 #6004]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:42:13.130946 #6004]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T14:42:13.243727 #6004]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>17683309-793c-4b77-a88c-1f3ff8c66c61</RequestID></Response> #####
+W, [2010-10-14T14:42:13.243794 #6004]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T13%3A42%3A13.000Z&Version=2009-08-15&Signature=Y1h3Ctf58T%2B5tdv4jeO%2FomspGxweuFeHMIk%2Fk%2BsHq6Y%3D ####
+I, [2010-10-14T14:43:48.517388 #6088]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:43:48.518727 #6088]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T14:43:48.668656 #6088]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>5007098c-2978-4712-bb7f-4c5d827b009d</RequestID></Response> #####
+W, [2010-10-14T14:43:48.668734 #6088]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T13%3A43%3A48.000Z&Version=2009-08-15&Signature=AGXqI5L5zLdjD7Pu%2BDpjsyxdV1GaoKR4uTkglmoMSQU%3D ####
+I, [2010-10-14T14:43:48.882677 #6088]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:44:12.489494 #6132]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:44:12.491182 #6132]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T14:44:12.635068 #6132]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>11beb0ea-430e-4d95-bc58-2dbb9bec4bf3</RequestID></Response> #####
+W, [2010-10-14T14:44:12.635210 #6132]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T13%3A44%3A12.000Z&Version=2009-08-15&Signature=IuMQ67%2BJwcPtJ5%2BD%2BiVIq4zYfzB1Yj1UvDQfMmGJ%2F%2Fo%3D ####
+I, [2010-10-14T14:44:55.108634 #6172]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:44:55.109995 #6172]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T14:44:55.487197 #6172]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>f39511f5-5eaf-4c6a-bcb5-5ea8e51a3467</RequestID></Response> #####
+W, [2010-10-14T14:44:55.487396 #6172]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T13%3A44%3A55.000Z&Version=2009-08-15&Signature=Bend6cHvXfnIiP8RomAphWULWWUDGvRm%2BG3Om2%2Fe%2Ff8%3D ####
+I, [2010-10-14T14:44:55.707692 #6172]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:45:03.813236 #6200]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:45:03.814012 #6200]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T14:45:03.941759 #6200]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>9fd7c2b6-6e19-415f-b6cd-daebe73dd7d6</RequestID></Response> #####
+W, [2010-10-14T14:45:03.942048 #6200]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T13%3A45%3A03.000Z&Version=2009-08-15&Signature=yuOQ5zT8Uq0r4%2B8B7t%2B%2FaTnw4IUSLGXjS2%2FZCofY4p0%3D ####
+I, [2010-10-14T14:45:04.134371 #6200]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:45:17.719113 #6244]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:45:17.720067 #6244]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T14:45:17.853337 #6244]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>9826714a-7cd1-4737-bc02-1f23b58d2841</RequestID></Response> #####
+W, [2010-10-14T14:45:17.853508 #6244]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T13%3A45%3A17.000Z&Version=2009-08-15&Signature=MC1n9GRuPIwzmeIotkSdTDIGNckPkT2mMmEPPsGOr1g%3D ####
+I, [2010-10-14T14:45:18.035811 #6244]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:45:38.754214 #6270]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:45:38.755198 #6270]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T14:45:38.873629 #6270]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>ecca48b5-3dc8-4b4b-abd3-aeaa7fb7126a</RequestID></Response> #####
+W, [2010-10-14T14:45:38.873769 #6270]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T13%3A45%3A38.000Z&Version=2009-08-15&Signature=syujfRph%2FSmuHFLw5R5bHrHiltc0HS5y0XZpFoJ77ew%3D ####
+I, [2010-10-14T14:45:39.057519 #6270]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:50:21.099605 #6488]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T14:50:21.100774 #6488]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T14:50:21.253813 #6488]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>3e8ec8dd-ae87-48c5-95cc-3a68a5bccd1f</RequestID></Response> #####
+W, [2010-10-14T14:50:21.253933 #6488]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T13%3A50%3A21.000Z&Version=2009-08-15&Signature=bj6ynWIYUxCLE4eIoteRqPxy7TaNhd8vsJFDP9uKVUU%3D ####
+I, [2010-10-14T14:50:21.695297 #6488]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:04:00.363532 #6970]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:04:00.364694 #6970]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T15:04:00.770556 #6970]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>72cd8363-8875-454c-8c8f-6c9aa344dd8a</RequestID></Response> #####
+W, [2010-10-14T15:04:00.770758 #6970]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T14%3A04%3A00.000Z&Version=2009-08-15&Signature=HmpbAFNMunZme9C7zrxezK3HTRjir6%2BMiKVwBMX8ECI%3D ####
+I, [2010-10-14T15:18:52.726885 #7457]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:18:52.727738 #7457]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:20:19.926107 #7509]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:20:19.927027 #7509]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:21:49.473931 #7560]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:21:49.474687 #7560]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:22:10.725513 #7564]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:22:10.726346 #7564]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:23:52.479125 #7653]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:23:52.479939 #7653]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:24:06.905787 #7658]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:24:06.906650 #7658]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:24:43.449621 #7678]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:24:43.450498 #7678]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:27:01.963361 #7766]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:27:01.964181 #7766]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:41:51.484801 #8350]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:41:51.485639 #8350]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:42:10.324226 #8355]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:42:10.325109 #8355]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:42:37.563455 #8377]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:42:37.564302 #8377]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:42:54.259388 #8397]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:42:54.260230 #8397]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:43:14.904382 #8402]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:43:14.905565 #8402]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:43:44.223338 #8423]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:43:44.224163 #8423]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:44:22.651834 #8459]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:44:22.652647 #8459]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:44:56.888291 #8480]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:44:56.889133 #8480]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-14T15:45:05.481533 #8500]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:45:05.482415 #8500]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-14T15:45:05.627479 #8500]  WARN -- : ##### Aws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidGroup.Duplicate</Code><Message>The security group 'testing' already exists</Message></Error></Errors><RequestID>22d7747c-b5ee-4c4c-a0ef-a23aa3647b3e</RequestID></Response> #####
+W, [2010-10-14T15:45:05.627620 #8500]  WARN -- : ##### Aws::Ec2 request: eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateSecurityGroup&GroupDescription=this%20is%20a%20test&GroupName=testing&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-14T14%3A45%3A05.000Z&Version=2009-08-15&Signature=bQDMc88%2FtfVdZc4sjvkIGeLvAbhsummCSgxeNBPH7Uc%3D ####
+I, [2010-10-14T15:45:06.027078 #8500]  INFO -- : New Aws::Ec2 using per_request-connection mode
+I, [2010-10-14T15:45:08.194847 #8500]  INFO -- : New Aws::Ec2 using per_request-connection mode

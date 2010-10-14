@@ -1,13 +1,19 @@
 require 'helper'
+require 'net/ssh'
+
+
+# Note to self - run individual tests with:
+# ruby -I"lib:test" test/test_catpaws.rb -n  test_01_ec2_start
+# Otherwise just rake test.
 
 class TestCatpaws < Test::Unit::TestCase
   
-  def test_ec2_start_stop
+  def test_01_ec2_start
     instances = CaTPAWS::EC2::Instances.new(
                                             :group_name        => 'testing',
                                             :group_description => 'this is a test',
-#                                            :ami               => 'ami-cf4d67bb',
-                                            :ami               => 'emi-0243110F',
+                                            :ami               => 'ami-cf4d67bb',
+#                                            :ami               => 'emi-0243110F',
                                             :instance_type     => 'm1.small',
                                             :key               => ENV['EC2_KEY'],
                                             :key_file          => ENV['EC2_KEYFILE'],
@@ -15,8 +21,10 @@ class TestCatpaws < Test::Unit::TestCase
                                             :access_key        => ENV['AMAZON_ACCESS_KEY'],
                                             :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY'],
                                             :ec2_url           => ENV['EC2_URL'],
-                                            :working_dir       => '/mnt/test'
+                                            :working_dir       => '/mnt/test',
+                                            :catpaws_logfile   => 'catpaws.log'
                                             )
+    
     
     assert_instance_of( CaTPAWS::EC2::Instances, instances, 'instances instanciation' )
     
@@ -37,8 +45,54 @@ class TestCatpaws < Test::Unit::TestCase
     assert_equal(instances.root_device_type.length, 2, 'Number of root device type')
     assert_equal(instances.monitoring_state.length, 2, 'Number of monitoring state length')
 
-    #just check stop doesn't raise anything. Not sure how to test more
-    assert_nothing_raised( Exception ) { instances.shutdown() }
+    assert_instance_of( Aws::Ec2, instances.ec2, 'Grab EC2 handle' )
+    
+
   end
+
+
+  def test_02_ec2_ssh
+    instances = CaTPAWS::EC2::Instances.new(
+                                             :group_name        => 'testing',
+                                             :key               => ENV['EC2_KEY'],
+                                             :key_file          => ENV['EC2_KEYFILE'],
+                                             :access_key        => ENV['AMAZON_ACCESS_KEY'],
+                                             :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY'],
+                                             :ec2_url           => ENV['EC2_URL'],
+                                             :catpaws_logfile   => 'catpaws.log',
+                                             :no_new            => true
+                                             )
+    
+    pdns = instances.private_dns_name
+
+    instances.dns_name.each do |dns|
+      
+      Net::SSH.start(dns, 'ubuntu', :keys => [ENV['EC2_KEYFILE']]) do |ssh|
+        output = ssh.exec!("hostname")
+        assert_equal(pdns.grep(/^#{output}*/).length, 1, "ssh to instance (#{output})")
+      end
+
+    end
+
+
+  end
+
+
+  def test_999_ec2_stop
+    instances = CaTPAWS::EC2::Instances.new(
+                                             :group_name        => 'testing',
+                                             :key               => ENV['EC2_KEY'],
+                                             :key_file          => ENV['EC2_KEYFILE'],
+                                             :access_key        => ENV['AMAZON_ACCESS_KEY'],
+                                             :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY'],
+                                             :ec2_url           => ENV['EC2_URL'],
+                                             :catpaws_logfile   => 'catpaws.log',
+                                             :no_new            => true
+                                            )
+    #just check stop doesn't raise anything. Not sure how to test more
+#    assert_nothing_raised( Exception ) { @instances.shutdown() }
+    puts "testing stop"
+  end
+
 
 end

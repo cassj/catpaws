@@ -16,3 +16,32 @@ Capistrano::Configuration.instance(:must_exist).load do
   
 end
 
+
+module Capistrano
+  class Configuration
+    module Servers
+
+      def find_servers_for_task(task, options={})
+              
+        attempts  = options[:attempts].to_i || 1
+        wait_time = options[:wait_time].to_i || 10
+        options.delete(:attempts)
+        options.delete(:wait_time)
+        
+        servers = find_servers(task.options.merge(options))
+        attempt = 1
+
+        while(servers.length == 0 && attempt <= attempts)
+          wait(wait_time)
+          servers = find_servers(task.options.merge(options))
+          attempts += 1
+        end
+        
+        return servers
+
+      end
+
+    end
+  end
+end
+

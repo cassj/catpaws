@@ -1,38 +1,6 @@
 require 'catpaws/base/cap'
 require 'catpaws/ec2/catpaws'
 
-
-#We need to override the find_servers_for_task to include an option to wait for servers to be ready
-#so we can kick off long jobs and let them background
-module Capistrano
-  class Configuration
-    module Servers
-
-      def find_servers_for_task(task, options={})
-              
-        attempts  = options[:attempts].to_i || 1
-        wait_time = options[:wait_time].to_i || 10
-        options.delete(:attempts)
-        options.delete(:wait_time)
-        
-        servers = find_servers(task.options.merge(options))
-        attempt = 1
-
-        while(servers.length == 0 && attempt <= attempts)
-          wait(wait_time)
-          servers = find_servers(task.options.merge(options))
-          attempts += 1
-        end
-        
-        return servers
-
-      end
-
-    end
-  end
-end
-
-
 Capistrano::Configuration.instance(:must_exist).load do
 
   #asw_access_key and aws_secret_access_key are set in base.
@@ -87,7 +55,7 @@ Capistrano::Configuration.instance(:must_exist).load do
       ssh_cidr_ip       = variables[:ssh_cidr_ip] || '0.0.0.0/0'
       ec2_url           = variables[:ec2_url] or abort "no ec2_url defined"
       working_dir       = variables[:working_dir]
-
+      catpaws_logfile    = variables[:catpaws_logfile] 
 
       #create a CaTPAWS::EC2::Instances object for the group we want.
       #if the group already exists, it'll check 
@@ -102,7 +70,9 @@ Capistrano::Configuration.instance(:must_exist).load do
                                               :access_key        => aws_access_key,
                                               :secret_access_key => aws_secret_access_key,
                                               :ec2_url           => ec2_url,
-                                              :working_dir       => working_dir
+                                              :working_dir       => working_dir,
+                                              :catpaws_logfile   => catpaws_logfile
+
                                               )
       
 
@@ -143,7 +113,8 @@ Capistrano::Configuration.instance(:must_exist).load do
       group_name        = variables[:group_name] or abort "No group_name set in config or task parameters"
       cat_group_name    = "CaTPAWS_#{group_name}"
       ec2_url           = variables[:ec2_url] or abort "no ec2_url defined"
-      
+      catpaws_logfile   = variables[:catpaws_logfile]
+
       #create a CaTPAWS::EC2::Instances object for the group we want.
       #use no_new so we don't start new stuff if nothing is running
       begin
@@ -152,7 +123,8 @@ Capistrano::Configuration.instance(:must_exist).load do
                                                 :access_key        => aws_access_key,
                                                 :secret_access_key => aws_secret_access_key,
                                                 :ec2_url           => ec2_url,
-                                                :no_new            => true
+                                                :no_new            => true,
+                                                :catpaws_logfile   => catpaws_logfile
                                                 )
       
         
@@ -178,6 +150,27 @@ Capistrano::Configuration.instance(:must_exist).load do
     
 
   end #namespace EC2
+
+
+  namespace :EBS do 
+    
+    desc 'Create a new EBS volume'
+    task :create, :roles => :master do
+      puts "I would create a volume"
+    end
+    
+    desc 'Create a new EBS volume from existing snapshot'
+    task :create_from_snap, :roles => :master do
+      puts "I would create a volume from a snapshot"
+    end
+
+    desc 'Delete EBS volume'
+    task :delete, :roles => :master do
+      puts "I would delete a volume"
+    end
+
+  end #namespace EBS
+  
 
 end #config.load
 

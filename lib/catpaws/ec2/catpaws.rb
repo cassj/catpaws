@@ -36,9 +36,13 @@ module CaTPAWS
         #these we need regardless
         @access_key        = params[:access_key] or raise CaTPAWS::EC2::Error::MissingParameter, 'Please provide an AWS access_key'
         @secret_access_key = params[:secret_access_key] or raise CaTPAWS::EC2::Error::MissingParameter, 'Please provide an AWS secret_access_key'
-        @ec2_url           = params[:ec2_url] || 'eu-west-1.ec2.amazonaws.com'
+        @ec2_url           = params[:ec2_url] || 'https://eu-west-1.ec2.amazonaws.com/'
+        @ec2_url = "#{@ec2_url}/" unless @ec2_url[-1,1] == '/'
         @group_name        = params[:group_name] or raise CaTPAWS::EC2::Error::MissingParameter, 'Please provide a group_name'
- 
+        @catpaws_logfile   = params[:catpaws_logfile] || STDERR
+        
+        @catpaws_log       = @catpaws_logfile.nil? ? nil : Logger.new(@catpaws_logfile)
+        
         unless (@no_new)
           @group_description = params[:group_description] || ''
           @nhosts            = params[:nhosts] || 1
@@ -53,21 +57,22 @@ module CaTPAWS
         
         #get connection
         @ec2   = RightAws::Ec2.new(@access_key, @secret_access_key,
-                                   { :endpoint_url => @ec2_url }  
+                                   { :endpoint_url => @ec2_url,
+                                     :logger => @catpaws_log
+                                   }  
                                    )
-
+        
         unless(@no_new)
           # try creating a new group and nhosts within it
           begin
+            
             @ec2.create_security_group(@group_name, @group_description)
-
             set_group_perms(:ip_protocol => 'tcp',
                             :from_port   => @ssh_from_port, 
                             :to_port     => @ssh_to_port,
                             :cidr_ip     => @ssh_cidr_ip
                             )
-            
-            
+
             @ec2.run_instances(@ami, 
                                @nhosts,
                                @nhosts, 
@@ -100,12 +105,12 @@ module CaTPAWS
           end #begin
           
         end #unless 
-
+        
         # load the metadata about the instances in this group
         get_instances()
-
+        
         unless (@no_new)
-          # wait for any pending for up to 5 mins
+           # wait for any pending for up to 5 mins
           attempts = 0
           stats = state_code()
           while (stats.any? {|s| s==0 }) do
@@ -118,11 +123,11 @@ module CaTPAWS
             get_instances()
             stats = state_code()
           end
-        
+          
           unless (@instances.length == @nhosts)
             raise CaTPAWS::EC2::Error::InstanceRetrieval, "Number of running instances in this group does not match nhosts"
           end
-        
+          
           unless  ami().all?{|a| a == @ami } 
             raise CaTPAWS::EC2::Error::InstanceRetrieval, "Running instances in this group are not all instances of ami #{@ami}"
           end
@@ -131,17 +136,16 @@ module CaTPAWS
             raise CaTPAWS::EC2::Error::InstanceRetrieval, "Running instances in this group do not have key #{@key}"
           end
         end
-        
       end #initalize
-    
+      
       
       #shutdown all the instances in this group
       def shutdown()
-
+        
         #shutdown all the instances we have.
         ids = id()
-
-        @ec2.terminate_instances([ids])
+        
+        @ec2.terminate_instances(ids)
         
         # wait for them to shut down for a couple of minutes
         attempts = 0
@@ -154,27 +158,27 @@ module CaTPAWS
           sleep(10)
           attempts+=1
           get_instances(true)
-          stats = state_code()
+           stats = state_code()
         end
-
+        
         #and delete the associated security group
         @ec2.delete_security_group(@group_name)
-
+        
       end
-
+      
       #create a new ami from each of the instances. (generally you should only do this on 1 instance,I guess)
       def bundle()
         puts "TODO"
       end
-
-      #snapshot any EBS volumes attached to the instances
+      
+       #snapshot any EBS volumes attached to the instances
       def snapshot()
         puts "TODO"
       end
- 
-
-
-
+      
+      
+      
+      
       
       def set_group_perms(params)
         @ec2.authorize_security_group_IP_ingress(@group_name, 
@@ -182,12 +186,12 @@ module CaTPAWS
                                                  params[:to_port], 
                                                  params[:ip_protocol], 
                                                  params[:cidr_ip])
-
-
+        
+        
       end
       public :set_group_perms
-
-
+      
+      
       def check_group_perms(params)
         
         ip_protocol = params[:ip_protocol] or raise  CaTPAWS::EC2::Error::MissingParameter, 'ip_protocol'
@@ -212,7 +216,7 @@ module CaTPAWS
         
       end
       public :check_group_perms
-
+      
       
       #retrieve and parse the instances for this group
       def get_instances(incl_stopped=false)
@@ -224,18 +228,22 @@ module CaTPAWS
         end 
         
         unless (incl_stopped)
-          instances = instances.select {|x| x[:aws_state_code] <= 16}
+          instances = instances.select {|x| x[:aws_state_code].to_i <= 16}
         end
-        
         @instances = instances
-       end
+      end
       private :get_instances
-
+      
       def working_dir()
-         return @working_dir
+        return @working_dir
       end
       public :working_dir
-
+      
+      #return the ec2 handle so we can just call stuff on it direct
+      def ec2
+        return @ec2
+      end
+      public :ec2
 
 
       #returns the array of instance metadata
@@ -253,7 +261,7 @@ module CaTPAWS
       public :id
         
       def state_code()
-        return @instances.map {|i| i[:aws_state_code]}
+        return @instances.map {|i| i[:aws_state_code].to_i}
       end
       public :state_code
       
