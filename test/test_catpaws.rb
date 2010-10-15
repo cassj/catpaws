@@ -1,31 +1,37 @@
 require 'helper'
 require 'net/ssh'
 
-
 # Note to self - run individual tests with:
 # ruby -I"lib:test" test/test_catpaws.rb -n  test_01_ec2_start
 # Otherwise just rake test.
 
+# This really just tests the catpaws classes, it doesn't test
+# the recipes that CaTPAWS adds to Capistrano
 class TestCatpaws < Test::Unit::TestCase
-  
+
+  # Set appropriate environment variables in ~/.bash_profile or wherever.
+  def params
+    
+    return {
+      :group_name        => 'testing',
+      :group_description => 'this is a test',
+      :ami               => ENV['CATPAWS_TEST_AMI'],
+      :instance_type     => ENV['CATPAWS_TEST_INSTANCE_TYPE'],
+      :key               => ENV['EC2_KEY'],
+      :key_file          => ENV['EC2_KEYFILE'],
+      :access_key        => ENV['AMAZON_ACCESS_KEY'],
+      :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY'],
+      :ec2_url           => ENV['EC2_URL'],
+      :nhosts            => 2,
+      :working_dir       => '/mnt/test',
+      :catpaws_logfile   => 'catpaws.log'
+    }
+  end 
+
+  #start a couple of instances 
   def test_01_ec2_start
-    instances = CaTPAWS::EC2::Instances.new(
-                                            :group_name        => 'testing',
-                                            :group_description => 'this is a test',
-                                            :ami               => 'ami-cf4d67bb',
-#                                            :ami               => 'emi-0243110F',
-                                            :instance_type     => 'm1.small',
-                                            :key               => ENV['EC2_KEY'],
-                                            :key_file          => ENV['EC2_KEYFILE'],
-                                            :nhosts            => 2,
-                                            :access_key        => ENV['AMAZON_ACCESS_KEY'],
-                                            :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY'],
-                                            :ec2_url           => ENV['EC2_URL'],
-                                            :working_dir       => '/mnt/test',
-                                            :catpaws_logfile   => 'catpaws.log'
-                                            )
-    
-    
+    instances = CaTPAWS::EC2::Instances.new(params())
+                                                
     assert_instance_of( CaTPAWS::EC2::Instances, instances, 'instances instanciation' )
     
     #check all the accessors give you back something sane (TODO)
@@ -45,53 +51,65 @@ class TestCatpaws < Test::Unit::TestCase
     assert_equal(instances.root_device_type.length, 2, 'Number of root device type')
     assert_equal(instances.monitoring_state.length, 2, 'Number of monitoring state length')
 
-    assert_instance_of( Aws::Ec2, instances.ec2, 'Grab EC2 handle' )
+    assert_instance_of( RightAws::Ec2, instances.ec2, 'Grab EC2 handle' )
     
-
   end
 
 
   def test_02_ec2_ssh
-    instances = CaTPAWS::EC2::Instances.new(
-                                             :group_name        => 'testing',
-                                             :key               => ENV['EC2_KEY'],
-                                             :key_file          => ENV['EC2_KEYFILE'],
-                                             :access_key        => ENV['AMAZON_ACCESS_KEY'],
-                                             :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY'],
-                                             :ec2_url           => ENV['EC2_URL'],
-                                             :catpaws_logfile   => 'catpaws.log',
-                                             :no_new            => true
-                                             )
-    
-    pdns = instances.private_dns_name
-
+    params = params()
+    params[:no_new] = true
+    instances = CaTPAWS::EC2::Instances.new(params)
+                                                
     instances.dns_name.each do |dns|
       
-      Net::SSH.start(dns, 'ubuntu', :keys => [ENV['EC2_KEYFILE']]) do |ssh|
-        output = ssh.exec!("hostname")
-        assert_equal(pdns.grep(/^#{output}*/).length, 1, "ssh to instance (#{output})")
-      end
-
+      #not sure how else to test this.
+      assert_nothing_raised( Exception ) { 
+        
+        Net::SSH.start(dns, ENV['CATPAWS_TEST_USER'], :keys => [ENV['EC2_KEYFILE']]) do |ssh|
+          output = ssh.exec!("hostname")
+        end
+      }
+      
     end
+  end
 
+  
+  def test_03_attach_ebs
+    
+    params = params()
+    params[:no_new] = true
+    instances = CaTPAWS::EC2::Instances.new(params)
 
   end
 
 
+  def test_04_list_tags
+    params = params()
+    params[:no_new] = true
+    instances = CaTPAWS::EC2::Instances.new(params)
+    ec2 = instances.ec2
+  
+    
+    #test = ['atag','a tag value', 'i-ad1143da']
+    test = []
+    test.push(["d", "e", "f"], ["g","h","i"])
+    test.push(['atag','a tag value', 'i-ad1143da'],
+              ['atag2', 'another value', 'i-ad1143da'] )
+    puts ec2.create_tags(test)
+    
+  end
+
+
+  #shutdown the ec2 instances
   def test_999_ec2_stop
-    instances = CaTPAWS::EC2::Instances.new(
-                                             :group_name        => 'testing',
-                                             :key               => ENV['EC2_KEY'],
-                                             :key_file          => ENV['EC2_KEYFILE'],
-                                             :access_key        => ENV['AMAZON_ACCESS_KEY'],
-                                             :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY'],
-                                             :ec2_url           => ENV['EC2_URL'],
-                                             :catpaws_logfile   => 'catpaws.log',
-                                             :no_new            => true
-                                            )
+    
+    params = params()
+    params[:no_new] = true
+    instances = CaTPAWS::EC2::Instances.new(params)
+
     #just check stop doesn't raise anything. Not sure how to test more
-#    assert_nothing_raised( Exception ) { @instances.shutdown() }
-    puts "testing stop"
+    assert_nothing_raised( Exception ) { instances.shutdown() }
   end
 
 

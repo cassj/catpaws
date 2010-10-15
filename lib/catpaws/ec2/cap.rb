@@ -1,6 +1,12 @@
 require 'catpaws/base/cap'
 require 'catpaws/ec2/catpaws'
 
+#This isn't really what Cap was designed for. Tasks shouldn't really be running
+#stuff on localhost and it'll all break if you can't ssh to localhost. 
+#It's just a temporary kludge. The plan is to write a new  DSL that takes a bit from
+#Rake and a bit from Cap and is designed for running data analysis type workflows.
+
+
 Capistrano::Configuration.instance(:must_exist).load do
 
   #asw_access_key and aws_secret_access_key are set in base.
@@ -151,12 +157,40 @@ Capistrano::Configuration.instance(:must_exist).load do
 
   end #namespace EC2
 
-
+  
+  #don't need any catpaws code for ebs, tasks just use 
+  #the rightaws gem
   namespace :EBS do 
     
     desc 'Create a new EBS volume'
     task :create, :roles => :master do
-      puts "I would create a volume"
+      
+      #so, we'll tag ebs volumes for this project and then we can delete them as a group
+      ec2_url   = variables[:ec2_url] || ec2_url or abort "no ec2_url defined"
+      ec2_url = "#{ec2_url}/" unless ec2_url[-1,1] == '/' #add a trailing slash if it doesn't have one.
+     
+      ebs_tag   = variables[:ebs_tag] || variables[:group_name] or abort 'ebs_tag or group_name must be set to create ebs volumes'
+      ebs_size  = variables[:ebs_size] || 10
+      ebs_size  = ebs_size.to_i
+      zone      = variables[:ebs_zone] or  abort 'No ebs_zone set for volume creation'
+      catpaws_logfile    = variables[:catpaws_logfile] 
+      
+
+      #get connection
+      #:logger       => catpaws_logfile
+      ec2 = RightAws::Ec2.new(aws_access_key, aws_secret_access_key,
+                              { :endpoint_url => ec2_url
+                              })
+      
+      vol= ec2.create_volume(nil, ebs_size, zone)
+      #but we could just make the call ourselves like:
+#      call = "https://ec2.amazonaws.com/?Action=CreateTags"
+#      "&ResourceId.2=i-7f4d3a2b"
+#      "&Tag.1.Key=webserver"
+#      "&Tag.1.Value="
+#      "&Tag.2.Key=stack"
+#      "&Tag.2.Value=Production"
+#      "&AuthParams"
     end
     
     desc 'Create a new EBS volume from existing snapshot'
@@ -167,6 +201,14 @@ Capistrano::Configuration.instance(:must_exist).load do
     desc 'Delete EBS volume'
     task :delete, :roles => :master do
       puts "I would delete a volume"
+      
+      ec2 = RightAws::Ec2.new(@access_key, @secret_access_key,
+                                { :endpoint_url => @ec2_url,
+                                  :logger       => @catpaws_log
+                                })
+      
+      ec2.delete_volume('vol-b48a6fdd')
+      
     end
 
   end #namespace EBS

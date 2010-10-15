@@ -20,6 +20,7 @@ require 'catpaws'
 set :aws_access_key,  ENV['AMAZON_ACCESS_KEY']
 set :aws_secret_access_key , ENV['AMAZON_SECRET_ACCESS_KEY']
 set :ec2_url, ENV['EC2_URL']
+set :ebs_zone, ENV['EBS_AVAILABILITY_ZONE']
 set :ssh_options, { :user => "ubuntu", }
 set :nhosts, 1
 

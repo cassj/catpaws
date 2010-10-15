@@ -7,8 +7,9 @@ require 'catpaws/base/catpaws'
 # 
 # Module to facilitate managing ec2 instances by group for running Capistrano tasks. 
 # Essentially just a wrapper around the right_aws gem that parses the 
-# ec2 responses and organises everything by security group for running cap tasks.
-# Not intended to be used outside the CaTPAWS / Capistrano context.
+# ec2 responses, organises everything by security group for running cap tasks,
+# automatically opens ssh access on that group
+
 
 module CaTPAWS
   module EC2

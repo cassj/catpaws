@@ -73,7 +73,20 @@ Get the catpaws gem from github and build it
  rake gemspec
  rake build
  sudo gem install pkg/catpaws-*.gem
+
+You can test the gem before installing with 
+
+ rake test
+
+however this will fail unless you have some environment variables set. 
+As well as the variables described below for normal running of CaTPAWS, you'll need the 
+following testing variables set to appropriate values:
  
+ export CATPAWS_TEST_AMI='ami-1234567'
+ export CATPAWS_TEST_INSTANCE_TYPE='m1.small'
+ export CATPAWS_TEST_USER='ubuntu'
+
+
 
 Finally, set the following environment variables appropriately
 for your AWS account:
