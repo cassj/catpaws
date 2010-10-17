@@ -147,9 +147,9 @@ Capistrano::Configuration.instance(:must_exist).load do
       rescue
         #task should be idempotent. If group isn't found, it's probably because the task has already run once
         #only panic if we still have the correponding cap role
-        #if roles.has_key('group_name')
+        if roles.has_key('group_name')
           raise $!
-        #end
+        end
       end
       
     end #stop
@@ -158,17 +158,17 @@ Capistrano::Configuration.instance(:must_exist).load do
   end #namespace EC2
 
   
-  #don't need any catpaws code for ebs, tasks just use 
-  #the rightaws gem
+  #why not just use the ec2 gem to create ebs volumes? 
+  #this way we can fit it into a workflow I suppose,
+  #need to figure out what to do about attachment to multiple instances too.
   namespace :EBS do 
     
     desc 'Create a new EBS volume'
     task :create, :roles => :master do
       
-      #so, we'll tag ebs volumes for this project and then we can delete them as a group
       ec2_url   = variables[:ec2_url] || ec2_url or abort "no ec2_url defined"
-      ec2_url = "#{ec2_url}/" unless ec2_url[-1,1] == '/' #add a trailing slash if it doesn't have one.
-     
+      ec2_url   = "#{ec2_url}/" unless ec2_url[-1,1] == '/' #add a trailing slash if it doesn't have one.
+      snap_id   = variables[:snap_id] || nil 
       ebs_tag   = variables[:ebs_tag] || variables[:group_name] or abort 'ebs_tag or group_name must be set to create ebs volumes'
       ebs_size  = variables[:ebs_size] || 10
       ebs_size  = ebs_size.to_i
@@ -177,39 +177,107 @@ Capistrano::Configuration.instance(:must_exist).load do
       
 
       #get connection
-      #:logger       => catpaws_logfile
       ec2 = RightAws::Ec2.new(aws_access_key, aws_secret_access_key,
-                              { :endpoint_url => ec2_url
+                              { :endpoint_url => ec2_url,
+                                :logger       => catpaws_logfile
                               })
       
-      vol= ec2.create_volume(nil, ebs_size, zone)
-      #but we could just make the call ourselves like:
-#      call = "https://ec2.amazonaws.com/?Action=CreateTags"
-#      "&ResourceId.2=i-7f4d3a2b"
-#      "&Tag.1.Key=webserver"
-#      "&Tag.1.Value="
-#      "&Tag.2.Key=stack"
-#      "&Tag.2.Value=Production"
-#      "&AuthParams"
+      vol= ec2.create_volume(snap_id, ebs_size, zone)
+
+      #this doesn't yet work on Eucalyptus. Or at least, not on the 
+      #version that the Oxford cloud has installed. Fine on EC2 though.
+      ec2.create_tags('CaTPAWS_tag', ebs_tag, vol[:aws_id])
     end
     
-    desc 'Create a new EBS volume from existing snapshot'
-    task :create_from_snap, :roles => :master do
-      puts "I would create a volume from a snapshot"
-    end
 
+    #how to delete all volumes created for these instances?
+    #presumably if they just wanted to delete an ind
     desc 'Delete EBS volume'
     task :delete, :roles => :master do
-      puts "I would delete a volume"
-      
+  
+      ec2_url   = variables[:ec2_url] || ec2_url or abort "no ec2_url defined"
+      ec2_url   = "#{ec2_url}/" unless ec2_url[-1,1] == '/' #add a trailing slash if it doesn't have one.
+      vol_id   = variables[:vol_id] || nil 
+      catpaws_logfile    = variables[:catpaws_logfile] 
+
+ 
       ec2 = RightAws::Ec2.new(@access_key, @secret_access_key,
-                                { :endpoint_url => @ec2_url,
-                                  :logger       => @catpaws_log
-                                })
+                              { :endpoint_url => @ec2_url,
+                                :logger       => @catpaws_logfile
+                              })
       
-      ec2.delete_volume('vol-b48a6fdd')
+      ec2.delete_volume(vol_id)
       
     end
+
+    desc 'Delete all volumes with a given tag'
+    task :delete_by_tag, :roles=> :master do
+       puts "TODO"
+    end 
+
+ 
+    desc "attach vol_id to instance"
+    task :attach, :roles => :master do
+    
+      group_name        = variables[:group_name] or abort "No group_name set in config or task parameters"
+      cat_group_name    = "CaTPAWS_#{group_name}"
+      ec2_url           = variables[:ec2_url] or abort "no ec2_url defined"
+      catpaws_logfile   = variables[:catpaws_logfile]
+      vol_id            = variables[:vol_id] or abort "no vol_id defined"
+      mount_point       = variables[:mount_point] or abort "no mount point defined"
+
+      #create a CaTPAWS::EC2::Instances object for the group we want.
+      #use no_new so we don't start new stuff if nothing is running
+      instances = CaTPAWS::EC2::Instances.new(
+                                              :group_name        => cat_group_name,
+                                              :access_key        => aws_access_key,
+                                              :secret_access_key => aws_secret_access_key,
+                                              :ec2_url           => ec2_url,
+                                              :no_new            => true,
+                                              :catpaws_logfile   => catpaws_logfile
+                                              )
+      if (instances.id.length>1) 
+        abort "TODO - can't attach to multiple instances yet."
+      end
+
+      id = instances.id[0]
+      ec2 = instances.ec2
+      ec2.attach_volume(vol_id, id, mount_point)
+
+    end
+    before 'EBS:attach', 'EC2:start'
+
+    desc "detach vol_id from instance"
+    task :detach, :roles => :master do
+
+      group_name        = variables[:group_name] or abort "No group_name set in config or task parameters"
+      cat_group_name    = "CaTPAWS_#{group_name}"
+      ec2_url           = variables[:ec2_url] or abort "no ec2_url defined"
+      catpaws_logfile   = variables[:catpaws_logfile]
+      vol_id            = variables[:vol_id] or abort "no vol_id defined"
+      mount_point       = variables[:mount_point] or abort "no mount point defined"
+
+      #create a CaTPAWS::EC2::Instances object for the group we want.
+      #use no_new so we don't start new stuff if nothing is running
+      instances = CaTPAWS::EC2::Instances.new(
+                                              :group_name        => cat_group_name,
+                                              :access_key        => aws_access_key,
+                                              :secret_access_key => aws_secret_access_key,
+                                              :ec2_url           => ec2_url,
+                                              :no_new            => true,
+                                              :catpaws_logfile   => catpaws_logfile
+                                              )
+      if (instances.id.length>1)
+        abort "TODO - can't attach to multiple instances yet."
+      end
+
+      ec2 = instances.ec2
+      ec2.detach_volume(vol_id)
+
+    end
+    before 'EBS:attach', 'EC2:start'
+
+
 
   end #namespace EBS
   

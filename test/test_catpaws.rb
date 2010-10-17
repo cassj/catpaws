@@ -89,16 +89,13 @@ class TestCatpaws < Test::Unit::TestCase
     params[:no_new] = true
     instances = CaTPAWS::EC2::Instances.new(params)
     ec2 = instances.ec2
-  
-    
-    #test = ['atag','a tag value', 'i-ad1143da']
-    test = []
-    test.push(["d", "e", "f"], ["g","h","i"])
-    test.push(['atag','a tag value', 'i-ad1143da'],
-              ['atag2', 'another value', 'i-ad1143da'] )
-    puts ec2.create_tags(test)
+
+    ec2.create_tags('atag', 'a value', 'i-3C43067A',
+                    'atag2', 'another value', 'i-3C43067A')
     
   end
+
+
 
 
   #shutdown the ec2 instances

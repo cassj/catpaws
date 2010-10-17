@@ -34,9 +34,17 @@ role(:master, 'localhost')
 # if you're using a single group, just set these values globally.
 set :key, ENV['EC2_KEY']
 set :key_file, ENV['EC2_KEYFILE']
-set :ami, 'ami-cf4d67bb' 
+set :ami, 'ami-cf4d67bb'  #EC2 eu-west-1 
+#set :ami, 'emi-0243110F'   #OxEuca 
 set :instance_type, 'm1.small'
 set :group_name, 'testing'
+
+#You'll need to change this to something that exists.
+set :vol_id, 'vol-366ea65f' #ec2 eu-west-1a
+set :mount_point, '/dev/sdf'
+
+
+
 
 
 # If you need multiple groups, wrap their settings in a task and use

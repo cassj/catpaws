@@ -1782,3 +1782,854 @@ I, [2010-10-15T18:03:04.282533 #1965]  INFO -- : New RightAws::Ec2 using shared 
 I, [2010-10-15T18:03:04.283135 #1965]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
 I, [2010-10-15T18:04:19.280406 #2017]  INFO -- : New RightAws::Ec2 using shared connections mode
 I, [2010-10-15T18:04:19.281450 #2017]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-16T23:41:30.799486 #3027]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-16T23:41:30.800185 #3027]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-16T23:54:36.813078 #3472]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-16T23:54:36.813795 #3472]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-16T23:55:40.372946 #3545]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-16T23:55:40.373621 #3545]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-16T23:55:40.616160 #3545]  WARN -- : ##### RightAws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidParameterCombination</Code><Message>The parameter 'Value' may only be specified once.</Message></Error></Errors><RequestID>50904bc7-d874-4c8c-b2ab-28ee7b615b15</RequestID></Response> #####
+W, [2010-10-16T23:55:40.616327 #3545]  WARN -- : ##### RightAws::Ec2 request: https://eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateTags&ResourceId.1.1=atag&ResourceId.1.2=a%20tag%20value&ResourceId.1.3=i-ad1143da&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key.1=d&Tag.1.Key.2=e&Tag.1.Key.3=f&Tag.1.Value.1=g&Tag.1.Value.2=h&Tag.1.Value.3=i&Timestamp=2010-10-16T22%3A55%3A40.000Z&Version=2010-08-31&Signature=ZWGhhdD%2FMcAdyFNLKDwVWHCewLvmKGu%2BzqQabW4DEOs%3D ####
+I, [2010-10-16T23:56:35.833280 #3573]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-16T23:56:35.833949 #3573]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-16T23:56:36.184031 #3573]  WARN -- : ##### RightAws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidParameterCombination</Code><Message>The parameter 'Key' may only be specified once.</Message></Error></Errors><RequestID>828be4d0-76fb-489f-b7ec-6e45c6f08746</RequestID></Response> #####
+W, [2010-10-16T23:56:36.184207 #3573]  WARN -- : ##### RightAws::Ec2 request: https://eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateTags&ResourceId.1.1=atag&ResourceId.1.2=a%20tag%20value&ResourceId.1.3=i-ad1143da&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key.1=d&Tag.1.Key.2=e&Tag.1.Key.3=f&Tag.1.Value.1=g&Tag.1.Value.2=h&Tag.1.Value.3=i&Timestamp=2010-10-16T22%3A56%3A36.000Z&Version=2010-08-31&Signature=zRhj0WfgFBzHFHo%2F7rLWsHMSzKN%2BVoG649oO4Qkd4pg%3D ####
+I, [2010-10-16T23:56:36.187454 #3573]  INFO -- : Closing HTTPS connection to eu-west-1.ec2.amazonaws.com:443, reason: 'RightAws::AWSErrorHandler: code: 400: 'Bad Request', probability: 10%'
+I, [2010-10-17T01:44:50.284089 #7358]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T01:44:50.284878 #7358]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-17T01:44:50.841245 #7358]  WARN -- : ##### RightAws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidParameterCombination</Code><Message>The parameter 'Key' may only be specified once.</Message></Error></Errors><RequestID>34062aae-2bbd-4051-8f89-d4ff017c5590</RequestID></Response> #####
+W, [2010-10-17T01:44:50.841420 #7358]  WARN -- : ##### RightAws::Ec2 request: https://eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateTags&ResourceId.1.1=atag&ResourceId.1.2=a%20tag%20value&ResourceId.1.3=i-ad1143da&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key.1=d&Tag.1.Key.2=e&Tag.1.Key.3=f&Tag.1.Value.1=g&Tag.1.Value.2=h&Tag.1.Value.3=i&Timestamp=2010-10-17T00%3A44%3A50.000Z&Version=2010-08-31&Signature=5SAxe5U3wbUa7rFle3TXXdhk4KaKUx4%2F9LNkNRySaHk%3D ####
+I, [2010-10-17T01:45:45.308117 #7436]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T01:45:45.308788 #7436]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-17T01:45:45.526964 #7436]  WARN -- : ##### RightAws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidParameterCombination</Code><Message>The parameter 'Value' may only be specified once.</Message></Error></Errors><RequestID>3ed8ab10-4d6f-4164-aaf5-a1518edf8c90</RequestID></Response> #####
+W, [2010-10-17T01:45:45.527065 #7436]  WARN -- : ##### RightAws::Ec2 request: https://eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateTags&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key.1=atag&Tag.1.Key.2=a%20tag%20value&Tag.1.Key.3=i-ad1143da&Tag.1.Value.1=atag2&Tag.1.Value.2=another%20value&Tag.1.Value.3=i-ad1143da&Timestamp=2010-10-17T00%3A45%3A45.000Z&Version=2010-08-31&Signature=BDPp%2BjAGFVaQmCjYfpeDwbaFiHaD7WEkVzKAxSJ5YI4%3D ####
+I, [2010-10-17T02:01:26.171027 #7961]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:01:26.171724 #7961]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:01:56.493453 #7990]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:01:56.494103 #7990]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:02:46.542940 #8012]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:02:46.543651 #8012]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:02:59.292426 #8032]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:02:59.293085 #8032]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:03:16.169565 #8038]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:03:16.170257 #8038]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:03:27.014199 #8058]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:03:27.014881 #8058]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:03:52.133883 #8071]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:03:52.134525 #8071]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+E, [2010-10-17T02:03:52.307039 #8071] ERROR -- : #<ArgumentError: wrong number of arguments (3 for 2)>
+["/usr/local/lib/ruby/gems/1.9.1/gems/right_aws-2.0.0/lib/ec2/right_ec2_tags.rb:73:in `create_tags'", "test/test_catpaws.rb:98:in `test_04_list_tags'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:436:in `run'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:415:in `block (2 levels) in run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:409:in `each'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:409:in `block in run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:408:in `each'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:408:in `run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:388:in `run'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:329:in `block in autorun'"].join('
+')}
+E, [2010-10-17T02:03:52.307339 #8071] ERROR -- : Request was:  /?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=DescribeInstances&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-17T01%3A03%3A52.000Z&Version=2010-08-31&Signature=SChKCyLPb6wpfMtkAx0jTlUp0vRsviQdO8ceJSMTRGw%3D
+E, [2010-10-17T02:03:52.307387 #8071] ERROR -- : Response was: 200 -- OK -- <?xml version="1.0" encoding="UTF-8"?>
+<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2010-08-31/">
+    <requestId>b16de5ff-10d2-4e0c-956e-f87d20c4d65b</requestId>
+    <reservationSet>
+        <item>
+            <reservationId>r-af9ce4d8</reservationId>
+            <ownerId>474503389727</ownerId>
+            <groupSet>
+                <item>
+                    <groupId>testing</groupId>
+                </item>
+            </groupSet>
+            <instancesSet>
+                <item>
+                    <instanceId>i-ad1143da</instanceId>
+                    <imageId>ami-cf4d67bb</imageId>
+                    <instanceState>
+                        <code>16</code>
+                        <name>running</name>
+                    </instanceState>
+                    <privateDnsName>ip-10-48-129-49.eu-west-1.compute.internal</privateDnsName>
+                    <dnsName>ec2-46-51-139-173.eu-west-1.compute.amazonaws.com</dnsName>
+                    <reason/>
+                    <keyName>cassj</keyName>
+                    <amiLaunchIndex>0</amiLaunchIndex>
+                    <productCodes/>
+                    <instanceType>m1.small</instanceType>
+                    <launchTime>2010-10-15T12:53:46.000Z</launchTime>
+                    <placement>
+                        <availabilityZone>eu-west-1a</availabilityZone>
+                        <groupName/>
+                    </placement>
+                    <kernelId>aki-c34d67b7</kernelId>
+                    <monitoring>
+                        <state>disabled</state>
+                    </monitoring>
+                    <privateIpAddress>10.48.129.49</privateIpAddress>
+                    <ipAddress>46.51.139.173</ipAddress>
+                    <architecture>i386</architecture>
+                    <rootDeviceType>instance-store</rootDeviceType>
+                    <blockDeviceMapping/>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <clientToken/>
+                    <tagSet>
+                        <item>
+                            <key>testtag1</key>
+                            <value>this is a test</value>
+                        </item>
+                        <item>
+                            <key>testtag2</key>
+                            <value>this is another test</value>
+                        </item>
+                    </tagSet>
+                </item>
+                <item>
+                    <instanceId>i-ab1143dc</instanceId>
+                    <imageId>ami-cf4d67bb</imageId>
+                    <instanceState>
+                        <code>16</code>
+                        <name>running</name>
+                    </instanceState>
+                    <privateDnsName>ip-10-48-58-176.eu-west-1.compute.internal</privateDnsName>
+                    <dnsName>ec2-46-51-133-236.eu-west-1.compute.amazonaws.com</dnsName>
+                    <reason/>
+                    <keyName>cassj</keyName>
+                    <amiLaunchIndex>1</amiLaunchIndex>
+                    <productCodes/>
+                    <instanceType>m1.small</instanceType>
+                    <launchTime>2010-10-15T12:53:46.000Z</launchTime>
+                    <placement>
+                        <availabilityZone>eu-west-1a</availabilityZone>
+                        <groupName/>
+                    </placement>
+                    <kernelId>aki-c34d67b7</kernelId>
+                    <monitoring>
+                        <state>disabled</state>
+                    </monitoring>
+                    <privateIpAddress>10.48.58.176</privateIpAddress>
+                    <ipAddress>46.51.133.236</ipAddress>
+                    <architecture>i386</architecture>
+                    <rootDeviceType>instance-store</rootDeviceType>
+                    <blockDeviceMapping/>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <clientToken/>
+                </item>
+            </instancesSet>
+        </item>
+    </reservationSet>
+</DescribeInstancesResponse>
+I, [2010-10-17T02:04:17.604625 #8091]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:04:17.605279 #8091]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+E, [2010-10-17T02:04:17.823853 #8091] ERROR -- : #<ArgumentError: wrong number of arguments (3 for 2)>
+["/usr/local/lib/ruby/gems/1.9.1/gems/right_aws-2.0.0/lib/ec2/right_ec2_tags.rb:73:in `create_tags'", "test/test_catpaws.rb:98:in `test_04_list_tags'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:436:in `run'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:415:in `block (2 levels) in run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:409:in `each'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:409:in `block in run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:408:in `each'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:408:in `run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:388:in `run'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:329:in `block in autorun'"].join('
+')}
+E, [2010-10-17T02:04:17.824111 #8091] ERROR -- : Request was:  /?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=DescribeInstances&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-17T01%3A04%3A17.000Z&Version=2010-08-31&Signature=LYqpOlBFUbw%2BDv5ZlU3O4k7knw77RImItgDuJLjUbWI%3D
+E, [2010-10-17T02:04:17.824159 #8091] ERROR -- : Response was: 200 -- OK -- <?xml version="1.0" encoding="UTF-8"?>
+<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2010-08-31/">
+    <requestId>9ac01235-128b-4912-bf62-47c1727839ba</requestId>
+    <reservationSet>
+        <item>
+            <reservationId>r-af9ce4d8</reservationId>
+            <ownerId>474503389727</ownerId>
+            <groupSet>
+                <item>
+                    <groupId>testing</groupId>
+                </item>
+            </groupSet>
+            <instancesSet>
+                <item>
+                    <instanceId>i-ad1143da</instanceId>
+                    <imageId>ami-cf4d67bb</imageId>
+                    <instanceState>
+                        <code>16</code>
+                        <name>running</name>
+                    </instanceState>
+                    <privateDnsName>ip-10-48-129-49.eu-west-1.compute.internal</privateDnsName>
+                    <dnsName>ec2-46-51-139-173.eu-west-1.compute.amazonaws.com</dnsName>
+                    <reason/>
+                    <keyName>cassj</keyName>
+                    <amiLaunchIndex>0</amiLaunchIndex>
+                    <productCodes/>
+                    <instanceType>m1.small</instanceType>
+                    <launchTime>2010-10-15T12:53:46.000Z</launchTime>
+                    <placement>
+                        <availabilityZone>eu-west-1a</availabilityZone>
+                        <groupName/>
+                    </placement>
+                    <kernelId>aki-c34d67b7</kernelId>
+                    <monitoring>
+                        <state>disabled</state>
+                    </monitoring>
+                    <privateIpAddress>10.48.129.49</privateIpAddress>
+                    <ipAddress>46.51.139.173</ipAddress>
+                    <architecture>i386</architecture>
+                    <rootDeviceType>instance-store</rootDeviceType>
+                    <blockDeviceMapping/>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <clientToken/>
+                    <tagSet>
+                        <item>
+                            <key>testtag1</key>
+                            <value>this is a test</value>
+                        </item>
+                        <item>
+                            <key>testtag2</key>
+                            <value>this is another test</value>
+                        </item>
+                    </tagSet>
+                </item>
+                <item>
+                    <instanceId>i-ab1143dc</instanceId>
+                    <imageId>ami-cf4d67bb</imageId>
+                    <instanceState>
+                        <code>16</code>
+                        <name>running</name>
+                    </instanceState>
+                    <privateDnsName>ip-10-48-58-176.eu-west-1.compute.internal</privateDnsName>
+                    <dnsName>ec2-46-51-133-236.eu-west-1.compute.amazonaws.com</dnsName>
+                    <reason/>
+                    <keyName>cassj</keyName>
+                    <amiLaunchIndex>1</amiLaunchIndex>
+                    <productCodes/>
+                    <instanceType>m1.small</instanceType>
+                    <launchTime>2010-10-15T12:53:46.000Z</launchTime>
+                    <placement>
+                        <availabilityZone>eu-west-1a</availabilityZone>
+                        <groupName/>
+                    </placement>
+                    <kernelId>aki-c34d67b7</kernelId>
+                    <monitoring>
+                        <state>disabled</state>
+                    </monitoring>
+                    <privateIpAddress>10.48.58.176</privateIpAddress>
+                    <ipAddress>46.51.133.236</ipAddress>
+                    <architecture>i386</architecture>
+                    <rootDeviceType>instance-store</rootDeviceType>
+                    <blockDeviceMapping/>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <clientToken/>
+                </item>
+            </instancesSet>
+        </item>
+    </reservationSet>
+</DescribeInstancesResponse>
+I, [2010-10-17T02:04:27.370719 #8111]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:04:27.371351 #8111]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:04:38.231073 #8116]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:04:38.231777 #8116]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-17T02:04:38.424751 #8116]  WARN -- : ##### RightAws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidID</Code><Message>The ID '["atag", "a tag value", "i-ad1143da"]' is not valid</Message></Error></Errors><RequestID>c3e99bca-7f26-480d-8e6c-503c14ba5835</RequestID></Response> #####
+W, [2010-10-17T02:04:38.424865 #8116]  WARN -- : ##### RightAws::Ec2 request: https://eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateTags&ResourceId.0=%5B%22atag%22%2C%20%22a%20tag%20value%22%2C%20%22i-ad1143da%22%5D&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.0.Key=%5B%22atag%22%2C%20%22a%20tag%20value%22%2C%20%22i-ad1143da%22%5D&Tag.0.Value=%5B%22atag%22%2C%20%22a%20tag%20value%22%2C%20%22i-ad1143da%22%5D&Timestamp=2010-10-17T01%3A04%3A38.000Z&Version=2010-08-31&Signature=lLuJnYLfd%2Fz6Z814ynRCLn4i%2FVe%2BwE7VmgFPzOr%2F9%2FI%3D ####
+I, [2010-10-17T02:05:24.628295 #8141]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:05:24.629004 #8141]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:06:07.861521 #8177]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:06:07.862168 #8177]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:06:37.328352 #8200]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:06:37.328998 #8200]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+E, [2010-10-17T02:06:37.512223 #8200] ERROR -- : #<SystemExit: exit>
+["/usr/local/lib/ruby/gems/1.9.1/gems/right_aws-2.0.0/lib/ec2/right_ec2_tags.rb:68:in `exit'", "/usr/local/lib/ruby/gems/1.9.1/gems/right_aws-2.0.0/lib/ec2/right_ec2_tags.rb:68:in `create_tags'", "test/test_catpaws.rb:98:in `test_04_list_tags'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:436:in `run'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:415:in `block (2 levels) in run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:409:in `each'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:409:in `block in run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:408:in `each'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:408:in `run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:388:in `run'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:329:in `block in autorun'"].join('
+')}
+E, [2010-10-17T02:06:37.512364 #8200] ERROR -- : Request was:  /?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=DescribeInstances&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-17T01%3A06%3A37.000Z&Version=2010-08-31&Signature=DbmflzNq%2B7SdZgLjDrOt%2F%2FHbN0Yg8P18YYhCBSovGf4%3D
+E, [2010-10-17T02:06:37.512411 #8200] ERROR -- : Response was: 200 -- OK -- <?xml version="1.0" encoding="UTF-8"?>
+<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2010-08-31/">
+    <requestId>fe21666a-ac30-42c1-b79b-0d55bbabfe75</requestId>
+    <reservationSet>
+        <item>
+            <reservationId>r-af9ce4d8</reservationId>
+            <ownerId>474503389727</ownerId>
+            <groupSet>
+                <item>
+                    <groupId>testing</groupId>
+                </item>
+            </groupSet>
+            <instancesSet>
+                <item>
+                    <instanceId>i-ad1143da</instanceId>
+                    <imageId>ami-cf4d67bb</imageId>
+                    <instanceState>
+                        <code>16</code>
+                        <name>running</name>
+                    </instanceState>
+                    <privateDnsName>ip-10-48-129-49.eu-west-1.compute.internal</privateDnsName>
+                    <dnsName>ec2-46-51-139-173.eu-west-1.compute.amazonaws.com</dnsName>
+                    <reason/>
+                    <keyName>cassj</keyName>
+                    <amiLaunchIndex>0</amiLaunchIndex>
+                    <productCodes/>
+                    <instanceType>m1.small</instanceType>
+                    <launchTime>2010-10-15T12:53:46.000Z</launchTime>
+                    <placement>
+                        <availabilityZone>eu-west-1a</availabilityZone>
+                        <groupName/>
+                    </placement>
+                    <kernelId>aki-c34d67b7</kernelId>
+                    <monitoring>
+                        <state>disabled</state>
+                    </monitoring>
+                    <privateIpAddress>10.48.129.49</privateIpAddress>
+                    <ipAddress>46.51.139.173</ipAddress>
+                    <architecture>i386</architecture>
+                    <rootDeviceType>instance-store</rootDeviceType>
+                    <blockDeviceMapping/>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <clientToken/>
+                    <tagSet>
+                        <item>
+                            <key>testtag1</key>
+                            <value>this is a test</value>
+                        </item>
+                        <item>
+                            <key>testtag2</key>
+                            <value>this is another test</value>
+                        </item>
+                    </tagSet>
+                </item>
+                <item>
+                    <instanceId>i-ab1143dc</instanceId>
+                    <imageId>ami-cf4d67bb</imageId>
+                    <instanceState>
+                        <code>16</code>
+                        <name>running</name>
+                    </instanceState>
+                    <privateDnsName>ip-10-48-58-176.eu-west-1.compute.internal</privateDnsName>
+                    <dnsName>ec2-46-51-133-236.eu-west-1.compute.amazonaws.com</dnsName>
+                    <reason/>
+                    <keyName>cassj</keyName>
+                    <amiLaunchIndex>1</amiLaunchIndex>
+                    <productCodes/>
+                    <instanceType>m1.small</instanceType>
+                    <launchTime>2010-10-15T12:53:46.000Z</launchTime>
+                    <placement>
+                        <availabilityZone>eu-west-1a</availabilityZone>
+                        <groupName/>
+                    </placement>
+                    <kernelId>aki-c34d67b7</kernelId>
+                    <monitoring>
+                        <state>disabled</state>
+                    </monitoring>
+                    <privateIpAddress>10.48.58.176</privateIpAddress>
+                    <ipAddress>46.51.133.236</ipAddress>
+                    <architecture>i386</architecture>
+                    <rootDeviceType>instance-store</rootDeviceType>
+                    <blockDeviceMapping/>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <clientToken/>
+                </item>
+            </instancesSet>
+        </item>
+    </reservationSet>
+</DescribeInstancesResponse>
+I, [2010-10-17T02:07:08.614748 #8221]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:07:08.615423 #8221]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+E, [2010-10-17T02:07:08.804338 #8221] ERROR -- : #<SystemExit: exit>
+["/usr/local/lib/ruby/gems/1.9.1/gems/right_aws-2.0.0/lib/ec2/right_ec2_tags.rb:71:in `exit'", "/usr/local/lib/ruby/gems/1.9.1/gems/right_aws-2.0.0/lib/ec2/right_ec2_tags.rb:71:in `create_tags'", "test/test_catpaws.rb:98:in `test_04_list_tags'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:436:in `run'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:415:in `block (2 levels) in run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:409:in `each'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:409:in `block in run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:408:in `each'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:408:in `run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:388:in `run'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:329:in `block in autorun'"].join('
+')}
+E, [2010-10-17T02:07:08.804478 #8221] ERROR -- : Request was:  /?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=DescribeInstances&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-17T01%3A07%3A08.000Z&Version=2010-08-31&Signature=zd3shiQVCUgBDc6pJbitiilh4s0xUZsal5Xmv%2B6RgqY%3D
+E, [2010-10-17T02:07:08.804524 #8221] ERROR -- : Response was: 200 -- OK -- <?xml version="1.0" encoding="UTF-8"?>
+<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2010-08-31/">
+    <requestId>e73ca4ba-3c50-44e4-8f50-d43a864fbeb6</requestId>
+    <reservationSet>
+        <item>
+            <reservationId>r-af9ce4d8</reservationId>
+            <ownerId>474503389727</ownerId>
+            <groupSet>
+                <item>
+                    <groupId>testing</groupId>
+                </item>
+            </groupSet>
+            <instancesSet>
+                <item>
+                    <instanceId>i-ad1143da</instanceId>
+                    <imageId>ami-cf4d67bb</imageId>
+                    <instanceState>
+                        <code>16</code>
+                        <name>running</name>
+                    </instanceState>
+                    <privateDnsName>ip-10-48-129-49.eu-west-1.compute.internal</privateDnsName>
+                    <dnsName>ec2-46-51-139-173.eu-west-1.compute.amazonaws.com</dnsName>
+                    <reason/>
+                    <keyName>cassj</keyName>
+                    <amiLaunchIndex>0</amiLaunchIndex>
+                    <productCodes/>
+                    <instanceType>m1.small</instanceType>
+                    <launchTime>2010-10-15T12:53:46.000Z</launchTime>
+                    <placement>
+                        <availabilityZone>eu-west-1a</availabilityZone>
+                        <groupName/>
+                    </placement>
+                    <kernelId>aki-c34d67b7</kernelId>
+                    <monitoring>
+                        <state>disabled</state>
+                    </monitoring>
+                    <privateIpAddress>10.48.129.49</privateIpAddress>
+                    <ipAddress>46.51.139.173</ipAddress>
+                    <architecture>i386</architecture>
+                    <rootDeviceType>instance-store</rootDeviceType>
+                    <blockDeviceMapping/>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <clientToken/>
+                    <tagSet>
+                        <item>
+                            <key>testtag1</key>
+                            <value>this is a test</value>
+                        </item>
+                        <item>
+                            <key>testtag2</key>
+                            <value>this is another test</value>
+                        </item>
+                    </tagSet>
+                </item>
+                <item>
+                    <instanceId>i-ab1143dc</instanceId>
+                    <imageId>ami-cf4d67bb</imageId>
+                    <instanceState>
+                        <code>16</code>
+                        <name>running</name>
+                    </instanceState>
+                    <privateDnsName>ip-10-48-58-176.eu-west-1.compute.internal</privateDnsName>
+                    <dnsName>ec2-46-51-133-236.eu-west-1.compute.amazonaws.com</dnsName>
+                    <reason/>
+                    <keyName>cassj</keyName>
+                    <amiLaunchIndex>1</amiLaunchIndex>
+                    <productCodes/>
+                    <instanceType>m1.small</instanceType>
+                    <launchTime>2010-10-15T12:53:46.000Z</launchTime>
+                    <placement>
+                        <availabilityZone>eu-west-1a</availabilityZone>
+                        <groupName/>
+                    </placement>
+                    <kernelId>aki-c34d67b7</kernelId>
+                    <monitoring>
+                        <state>disabled</state>
+                    </monitoring>
+                    <privateIpAddress>10.48.58.176</privateIpAddress>
+                    <ipAddress>46.51.133.236</ipAddress>
+                    <architecture>i386</architecture>
+                    <rootDeviceType>instance-store</rootDeviceType>
+                    <blockDeviceMapping/>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <clientToken/>
+                </item>
+            </instancesSet>
+        </item>
+    </reservationSet>
+</DescribeInstancesResponse>
+I, [2010-10-17T02:07:35.915083 #8243]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:07:35.915756 #8243]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+E, [2010-10-17T02:07:36.089290 #8243] ERROR -- : #<SystemExit: exit>
+["/usr/local/lib/ruby/gems/1.9.1/gems/right_aws-2.0.0/lib/ec2/right_ec2_tags.rb:71:in `exit'", "/usr/local/lib/ruby/gems/1.9.1/gems/right_aws-2.0.0/lib/ec2/right_ec2_tags.rb:71:in `create_tags'", "test/test_catpaws.rb:98:in `test_04_list_tags'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:436:in `run'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:415:in `block (2 levels) in run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:409:in `each'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:409:in `block in run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:408:in `each'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:408:in `run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:388:in `run'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:329:in `block in autorun'"].join('
+')}
+E, [2010-10-17T02:07:36.089500 #8243] ERROR -- : Request was:  /?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=DescribeInstances&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-17T01%3A07%3A35.000Z&Version=2010-08-31&Signature=ZSk0GYXnsERStQRwojkhUbAMpjHREdVVadTvGQUmD%2Fk%3D
+E, [2010-10-17T02:07:36.089548 #8243] ERROR -- : Response was: 200 -- OK -- <?xml version="1.0" encoding="UTF-8"?>
+<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2010-08-31/">
+    <requestId>f04f7884-b327-4fe5-b13e-59928b5ae28c</requestId>
+    <reservationSet>
+        <item>
+            <reservationId>r-af9ce4d8</reservationId>
+            <ownerId>474503389727</ownerId>
+            <groupSet>
+                <item>
+                    <groupId>testing</groupId>
+                </item>
+            </groupSet>
+            <instancesSet>
+                <item>
+                    <instanceId>i-ad1143da</instanceId>
+                    <imageId>ami-cf4d67bb</imageId>
+                    <instanceState>
+                        <code>16</code>
+                        <name>running</name>
+                    </instanceState>
+                    <privateDnsName>ip-10-48-129-49.eu-west-1.compute.internal</privateDnsName>
+                    <dnsName>ec2-46-51-139-173.eu-west-1.compute.amazonaws.com</dnsName>
+                    <reason/>
+                    <keyName>cassj</keyName>
+                    <amiLaunchIndex>0</amiLaunchIndex>
+                    <productCodes/>
+                    <instanceType>m1.small</instanceType>
+                    <launchTime>2010-10-15T12:53:46.000Z</launchTime>
+                    <placement>
+                        <availabilityZone>eu-west-1a</availabilityZone>
+                        <groupName/>
+                    </placement>
+                    <kernelId>aki-c34d67b7</kernelId>
+                    <monitoring>
+                        <state>disabled</state>
+                    </monitoring>
+                    <privateIpAddress>10.48.129.49</privateIpAddress>
+                    <ipAddress>46.51.139.173</ipAddress>
+                    <architecture>i386</architecture>
+                    <rootDeviceType>instance-store</rootDeviceType>
+                    <blockDeviceMapping/>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <clientToken/>
+                    <tagSet>
+                        <item>
+                            <key>testtag1</key>
+                            <value>this is a test</value>
+                        </item>
+                        <item>
+                            <key>testtag2</key>
+                            <value>this is another test</value>
+                        </item>
+                    </tagSet>
+                </item>
+                <item>
+                    <instanceId>i-ab1143dc</instanceId>
+                    <imageId>ami-cf4d67bb</imageId>
+                    <instanceState>
+                        <code>16</code>
+                        <name>running</name>
+                    </instanceState>
+                    <privateDnsName>ip-10-48-58-176.eu-west-1.compute.internal</privateDnsName>
+                    <dnsName>ec2-46-51-133-236.eu-west-1.compute.amazonaws.com</dnsName>
+                    <reason/>
+                    <keyName>cassj</keyName>
+                    <amiLaunchIndex>1</amiLaunchIndex>
+                    <productCodes/>
+                    <instanceType>m1.small</instanceType>
+                    <launchTime>2010-10-15T12:53:46.000Z</launchTime>
+                    <placement>
+                        <availabilityZone>eu-west-1a</availabilityZone>
+                        <groupName/>
+                    </placement>
+                    <kernelId>aki-c34d67b7</kernelId>
+                    <monitoring>
+                        <state>disabled</state>
+                    </monitoring>
+                    <privateIpAddress>10.48.58.176</privateIpAddress>
+                    <ipAddress>46.51.133.236</ipAddress>
+                    <architecture>i386</architecture>
+                    <rootDeviceType>instance-store</rootDeviceType>
+                    <blockDeviceMapping/>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <clientToken/>
+                </item>
+            </instancesSet>
+        </item>
+    </reservationSet>
+</DescribeInstancesResponse>
+I, [2010-10-17T02:08:00.101350 #8264]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:08:00.102014 #8264]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+E, [2010-10-17T02:08:00.276955 #8264] ERROR -- : #<SystemExit: exit>
+["/usr/local/lib/ruby/gems/1.9.1/gems/right_aws-2.0.0/lib/ec2/right_ec2_tags.rb:69:in `exit'", "/usr/local/lib/ruby/gems/1.9.1/gems/right_aws-2.0.0/lib/ec2/right_ec2_tags.rb:69:in `create_tags'", "test/test_catpaws.rb:98:in `test_04_list_tags'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:436:in `run'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:415:in `block (2 levels) in run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:409:in `each'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:409:in `block in run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:408:in `each'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:408:in `run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:388:in `run'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:329:in `block in autorun'"].join('
+')}
+E, [2010-10-17T02:08:00.277127 #8264] ERROR -- : Request was:  /?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=DescribeInstances&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-17T01%3A08%3A00.000Z&Version=2010-08-31&Signature=UtqYzkdLSpbKZQuqQRDQvlYY4PGwOj16RLE4RX4eu90%3D
+E, [2010-10-17T02:08:00.277173 #8264] ERROR -- : Response was: 200 -- OK -- <?xml version="1.0" encoding="UTF-8"?>
+<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2010-08-31/">
+    <requestId>dd2fd222-f037-4909-8075-d6d7531d1d21</requestId>
+    <reservationSet>
+        <item>
+            <reservationId>r-af9ce4d8</reservationId>
+            <ownerId>474503389727</ownerId>
+            <groupSet>
+                <item>
+                    <groupId>testing</groupId>
+                </item>
+            </groupSet>
+            <instancesSet>
+                <item>
+                    <instanceId>i-ad1143da</instanceId>
+                    <imageId>ami-cf4d67bb</imageId>
+                    <instanceState>
+                        <code>16</code>
+                        <name>running</name>
+                    </instanceState>
+                    <privateDnsName>ip-10-48-129-49.eu-west-1.compute.internal</privateDnsName>
+                    <dnsName>ec2-46-51-139-173.eu-west-1.compute.amazonaws.com</dnsName>
+                    <reason/>
+                    <keyName>cassj</keyName>
+                    <amiLaunchIndex>0</amiLaunchIndex>
+                    <productCodes/>
+                    <instanceType>m1.small</instanceType>
+                    <launchTime>2010-10-15T12:53:46.000Z</launchTime>
+                    <placement>
+                        <availabilityZone>eu-west-1a</availabilityZone>
+                        <groupName/>
+                    </placement>
+                    <kernelId>aki-c34d67b7</kernelId>
+                    <monitoring>
+                        <state>disabled</state>
+                    </monitoring>
+                    <privateIpAddress>10.48.129.49</privateIpAddress>
+                    <ipAddress>46.51.139.173</ipAddress>
+                    <architecture>i386</architecture>
+                    <rootDeviceType>instance-store</rootDeviceType>
+                    <blockDeviceMapping/>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <clientToken/>
+                    <tagSet>
+                        <item>
+                            <key>testtag1</key>
+                            <value>this is a test</value>
+                        </item>
+                        <item>
+                            <key>testtag2</key>
+                            <value>this is another test</value>
+                        </item>
+                    </tagSet>
+                </item>
+                <item>
+                    <instanceId>i-ab1143dc</instanceId>
+                    <imageId>ami-cf4d67bb</imageId>
+                    <instanceState>
+                        <code>16</code>
+                        <name>running</name>
+                    </instanceState>
+                    <privateDnsName>ip-10-48-58-176.eu-west-1.compute.internal</privateDnsName>
+                    <dnsName>ec2-46-51-133-236.eu-west-1.compute.amazonaws.com</dnsName>
+                    <reason/>
+                    <keyName>cassj</keyName>
+                    <amiLaunchIndex>1</amiLaunchIndex>
+                    <productCodes/>
+                    <instanceType>m1.small</instanceType>
+                    <launchTime>2010-10-15T12:53:46.000Z</launchTime>
+                    <placement>
+                        <availabilityZone>eu-west-1a</availabilityZone>
+                        <groupName/>
+                    </placement>
+                    <kernelId>aki-c34d67b7</kernelId>
+                    <monitoring>
+                        <state>disabled</state>
+                    </monitoring>
+                    <privateIpAddress>10.48.58.176</privateIpAddress>
+                    <ipAddress>46.51.133.236</ipAddress>
+                    <architecture>i386</architecture>
+                    <rootDeviceType>instance-store</rootDeviceType>
+                    <blockDeviceMapping/>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <clientToken/>
+                </item>
+            </instancesSet>
+        </item>
+    </reservationSet>
+</DescribeInstancesResponse>
+I, [2010-10-17T02:18:47.911578 #8610]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:18:47.912281 #8610]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:24:42.545519 #8806]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:24:42.546182 #8806]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+E, [2010-10-17T02:24:42.715589 #8806] ERROR -- : #<NoMethodError: undefined method `mod' for #<RightAws::Ec2:0x0000000281a168>>
+["/usr/local/lib/ruby/gems/1.9.1/gems/right_aws-2.0.0/lib/ec2/right_ec2_tags.rb:67:in `block in create_tags'", "/usr/local/lib/ruby/gems/1.9.1/gems/right_aws-2.0.0/lib/ec2/right_ec2_tags.rb:66:in `each'", "/usr/local/lib/ruby/gems/1.9.1/gems/right_aws-2.0.0/lib/ec2/right_ec2_tags.rb:66:in `each_with_index'", "/usr/local/lib/ruby/gems/1.9.1/gems/right_aws-2.0.0/lib/ec2/right_ec2_tags.rb:66:in `create_tags'", "test/test_catpaws.rb:93:in `test_04_list_tags'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:436:in `run'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:415:in `block (2 levels) in run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:409:in `each'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:409:in `block in run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:408:in `each'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:408:in `run_test_suites'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:388:in `run'", "/usr/local/lib/ruby/1.9.1/minitest/unit.rb:329:in `block in autorun'"].join('
+')}
+E, [2010-10-17T02:24:42.715703 #8806] ERROR -- : Request was:  /?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=DescribeInstances&SignatureMethod=HmacSHA256&SignatureVersion=2&Timestamp=2010-10-17T01%3A24%3A42.000Z&Version=2010-08-31&Signature=DtI5moQiXfwWWHLJy0Ap%2FsbVw9UTxqTjbHvSG3jKj%2Bo%3D
+E, [2010-10-17T02:24:42.715751 #8806] ERROR -- : Response was: 200 -- OK -- <?xml version="1.0" encoding="UTF-8"?>
+<DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2010-08-31/">
+    <requestId>a63c3877-ce11-49b5-9302-c0bc18e00831</requestId>
+    <reservationSet>
+        <item>
+            <reservationId>r-af9ce4d8</reservationId>
+            <ownerId>474503389727</ownerId>
+            <groupSet>
+                <item>
+                    <groupId>testing</groupId>
+                </item>
+            </groupSet>
+            <instancesSet>
+                <item>
+                    <instanceId>i-ad1143da</instanceId>
+                    <imageId>ami-cf4d67bb</imageId>
+                    <instanceState>
+                        <code>16</code>
+                        <name>running</name>
+                    </instanceState>
+                    <privateDnsName>ip-10-48-129-49.eu-west-1.compute.internal</privateDnsName>
+                    <dnsName>ec2-46-51-139-173.eu-west-1.compute.amazonaws.com</dnsName>
+                    <reason/>
+                    <keyName>cassj</keyName>
+                    <amiLaunchIndex>0</amiLaunchIndex>
+                    <productCodes/>
+                    <instanceType>m1.small</instanceType>
+                    <launchTime>2010-10-15T12:53:46.000Z</launchTime>
+                    <placement>
+                        <availabilityZone>eu-west-1a</availabilityZone>
+                        <groupName/>
+                    </placement>
+                    <kernelId>aki-c34d67b7</kernelId>
+                    <monitoring>
+                        <state>disabled</state>
+                    </monitoring>
+                    <privateIpAddress>10.48.129.49</privateIpAddress>
+                    <ipAddress>46.51.139.173</ipAddress>
+                    <architecture>i386</architecture>
+                    <rootDeviceType>instance-store</rootDeviceType>
+                    <blockDeviceMapping/>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <clientToken/>
+                    <tagSet>
+                        <item>
+                            <key>testtag1</key>
+                            <value>this is a test</value>
+                        </item>
+                        <item>
+                            <key>testtag2</key>
+                            <value>this is another test</value>
+                        </item>
+                    </tagSet>
+                </item>
+                <item>
+                    <instanceId>i-ab1143dc</instanceId>
+                    <imageId>ami-cf4d67bb</imageId>
+                    <instanceState>
+                        <code>16</code>
+                        <name>running</name>
+                    </instanceState>
+                    <privateDnsName>ip-10-48-58-176.eu-west-1.compute.internal</privateDnsName>
+                    <dnsName>ec2-46-51-133-236.eu-west-1.compute.amazonaws.com</dnsName>
+                    <reason/>
+                    <keyName>cassj</keyName>
+                    <amiLaunchIndex>1</amiLaunchIndex>
+                    <productCodes/>
+                    <instanceType>m1.small</instanceType>
+                    <launchTime>2010-10-15T12:53:46.000Z</launchTime>
+                    <placement>
+                        <availabilityZone>eu-west-1a</availabilityZone>
+                        <groupName/>
+                    </placement>
+                    <kernelId>aki-c34d67b7</kernelId>
+                    <monitoring>
+                        <state>disabled</state>
+                    </monitoring>
+                    <privateIpAddress>10.48.58.176</privateIpAddress>
+                    <ipAddress>46.51.133.236</ipAddress>
+                    <architecture>i386</architecture>
+                    <rootDeviceType>instance-store</rootDeviceType>
+                    <blockDeviceMapping/>
+                    <virtualizationType>paravirtual</virtualizationType>
+                    <clientToken/>
+                </item>
+            </instancesSet>
+        </item>
+    </reservationSet>
+</DescribeInstancesResponse>
+I, [2010-10-17T02:24:59.080045 #8812]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:24:59.081109 #8812]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:27:12.513913 #8897]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:27:12.514542 #8897]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:27:25.608255 #8903]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:27:25.608854 #8903]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:32:34.891672 #9182]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:32:34.892442 #9182]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:32:50.945670 #9189]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:32:50.946322 #9189]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:33:04.342224 #9210]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:33:04.342876 #9210]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T02:34:43.637997 #9265]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T02:34:43.638716 #9265]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T03:14:57.570105 #10583]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T03:14:57.570839 #10583]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-17T03:14:57.785554 #10583]  WARN -- : ##### RightAws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidParameterValue</Code><Message>Tag value cannot be null. Use empty string instead.</Message></Error></Errors><RequestID>bf887d3e-d0db-4f0c-a6a2-ddb43f8ed1bb</RequestID></Response> #####
+W, [2010-10-17T03:14:57.785682 #10583]  WARN -- : ##### RightAws::Ec2 request: https://eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateTags&ResourceId.1=i-ad1143da&ResourceId.2=i-ad1143da&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key=atag&Tag.2.Key=atag2&Tag.2.Value=another%20value&Timestamp=2010-10-17T02%3A14%3A57.000Z&Version=2010-08-31&Signature=jcfDWZILDEJ4wedUXkfzvJ%2Bb1lYAoC%2BhZDB0Uqt60NA%3D ####
+I, [2010-10-17T03:15:49.481900 #10622]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T03:15:49.482605 #10622]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+W, [2010-10-17T03:15:49.685191 #10622]  WARN -- : ##### RightAws::Ec2 returned an error: 400 Bad Request
+<?xml version="1.0" encoding="UTF-8"?>
+<Response><Errors><Error><Code>InvalidParameterValue</Code><Message>Tag value cannot be null. Use empty string instead.</Message></Error></Errors><RequestID>734143b6-aacd-4f89-a6e4-055f83149ad5</RequestID></Response> #####
+W, [2010-10-17T03:15:49.685364 #10622]  WARN -- : ##### RightAws::Ec2 request: https://eu-west-1.ec2.amazonaws.com:443/?AWSAccessKeyId=16F5AHH5HWR243WSNMR2&Action=CreateTags&ResourceId.1=i-ad1143da&ResourceId.2=i-ad1143da&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key=atag&Tag.2.Key=atag2&Tag.2.Value=another%20value&Timestamp=2010-10-17T02%3A15%3A49.000Z&Version=2010-08-31&Signature=pyuqLJIjEVORP3oPpegQYkZuUCYvHZmkFlgySQrusHs%3D ####
+I, [2010-10-17T03:16:18.560074 #10645]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T03:16:18.560813 #10645]  INFO -- : Opening new HTTPS connection to eu-west-1.ec2.amazonaws.com:443
+I, [2010-10-17T03:54:00.582477 #12003]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T03:54:00.583116 #12003]  INFO -- : Opening new HTTP connection to 163.1.124.50:8773
+I, [2010-10-17T03:54:00.775003 #12003]  INFO -- : Launching instance of image emi-0243110F for lO9Zb05Mdg8it69sizGsGHT6Xn3tfowwPxeg, key: cass-ngs, groups: testing
+I, [2010-10-17T03:56:36.161880 #12132]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T03:56:36.162526 #12132]  INFO -- : Opening new HTTP connection to 163.1.124.50:8773
+I, [2010-10-17T03:58:05.912298 #12183]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T03:58:05.912900 #12183]  INFO -- : Opening new HTTP connection to 163.1.124.50:8773
+W, [2010-10-17T03:58:05.991539 #12183]  WARN -- : ##### RightAws::Ec2 returned an error: 500 Internal Server Error
+Failure: 500 Internal Server Error
+ #####
+W, [2010-10-17T03:58:05.991652 #12183]  WARN -- : ##### RightAws::Ec2 request: http://163.1.124.50:8773/services/Eucalyptus/?AWSAccessKeyId=lO9Zb05Mdg8it69sizGsGHT6Xn3tfowwPxeg&Action=DeleteTags&ResourceId.1=i-3C43067A&ResourceId.2=i-3C43067A&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key=atag&Tag.1.Value=a%20value&Tag.2.Key=atag2&Tag.2.Value=another%20value&Timestamp=2010-10-17T02%3A58%3A05.000Z&Version=2010-08-31&Signature=5q6ajzZZrD%2BKDR%2BTshKqZ1VzFgPQGZYV%2Fzk0JI9iRYI%3D ####
+W, [2010-10-17T03:58:05.991886 #12183]  WARN -- : ##### Retry is needed, error pattern match: Internal Server Error #####
+I, [2010-10-17T03:58:05.991951 #12183]  INFO -- : Closing HTTP connection to 163.1.124.50:8773, reason: 'RightAws::AWSErrorHandler: error match to pattern 'Internal Server Error''
+W, [2010-10-17T03:58:05.992210 #12183]  WARN -- : ##### Retry #1 is being performed. Sleeping for 0.2 sec. Whole time: 0.000704 sec ####
+I, [2010-10-17T03:58:06.194813 #12183]  INFO -- : Opening new HTTP connection to 163.1.124.50:8773
+W, [2010-10-17T03:58:06.222553 #12183]  WARN -- : ##### RightAws::Ec2 returned an error: 500 Internal Server Error
+Failure: 500 Internal Server Error
+ #####
+W, [2010-10-17T03:58:06.222605 #12183]  WARN -- : ##### RightAws::Ec2 request: http://163.1.124.50:8773/services/Eucalyptus/?AWSAccessKeyId=lO9Zb05Mdg8it69sizGsGHT6Xn3tfowwPxeg&Action=DeleteTags&ResourceId.1=i-3C43067A&ResourceId.2=i-3C43067A&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key=atag&Tag.1.Value=a%20value&Tag.2.Key=atag2&Tag.2.Value=another%20value&Timestamp=2010-10-17T02%3A58%3A05.000Z&Version=2010-08-31&Signature=5q6ajzZZrD%2BKDR%2BTshKqZ1VzFgPQGZYV%2Fzk0JI9iRYI%3D ####
+W, [2010-10-17T03:58:06.222811 #12183]  WARN -- : ##### Retry is needed, error pattern match: Internal Server Error #####
+I, [2010-10-17T03:58:06.222871 #12183]  INFO -- : Closing HTTP connection to 163.1.124.50:8773, reason: 'RightAws::AWSErrorHandler: error match to pattern 'Internal Server Error''
+W, [2010-10-17T03:58:06.222958 #12183]  WARN -- : ##### Retry #2 is being performed. Sleeping for 0.4 sec. Whole time: 0.231461 sec ####
+I, [2010-10-17T03:58:06.624612 #12183]  INFO -- : Opening new HTTP connection to 163.1.124.50:8773
+W, [2010-10-17T03:58:06.652085 #12183]  WARN -- : ##### RightAws::Ec2 returned an error: 500 Internal Server Error
+Failure: 500 Internal Server Error
+ #####
+W, [2010-10-17T03:58:06.652138 #12183]  WARN -- : ##### RightAws::Ec2 request: http://163.1.124.50:8773/services/Eucalyptus/?AWSAccessKeyId=lO9Zb05Mdg8it69sizGsGHT6Xn3tfowwPxeg&Action=DeleteTags&ResourceId.1=i-3C43067A&ResourceId.2=i-3C43067A&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key=atag&Tag.1.Value=a%20value&Tag.2.Key=atag2&Tag.2.Value=another%20value&Timestamp=2010-10-17T02%3A58%3A05.000Z&Version=2010-08-31&Signature=5q6ajzZZrD%2BKDR%2BTshKqZ1VzFgPQGZYV%2Fzk0JI9iRYI%3D ####
+W, [2010-10-17T03:58:06.652296 #12183]  WARN -- : ##### Retry is needed, error pattern match: Internal Server Error #####
+I, [2010-10-17T03:58:06.652353 #12183]  INFO -- : Closing HTTP connection to 163.1.124.50:8773, reason: 'RightAws::AWSErrorHandler: error match to pattern 'Internal Server Error''
+W, [2010-10-17T03:58:06.652439 #12183]  WARN -- : ##### Retry #3 is being performed. Sleeping for 0.8 sec. Whole time: 0.660943 sec ####
+I, [2010-10-17T03:58:07.454275 #12183]  INFO -- : Opening new HTTP connection to 163.1.124.50:8773
+W, [2010-10-17T03:58:07.481998 #12183]  WARN -- : ##### RightAws::Ec2 returned an error: 500 Internal Server Error
+Failure: 500 Internal Server Error
+ #####
+W, [2010-10-17T03:58:07.482051 #12183]  WARN -- : ##### RightAws::Ec2 request: http://163.1.124.50:8773/services/Eucalyptus/?AWSAccessKeyId=lO9Zb05Mdg8it69sizGsGHT6Xn3tfowwPxeg&Action=DeleteTags&ResourceId.1=i-3C43067A&ResourceId.2=i-3C43067A&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key=atag&Tag.1.Value=a%20value&Tag.2.Key=atag2&Tag.2.Value=another%20value&Timestamp=2010-10-17T02%3A58%3A05.000Z&Version=2010-08-31&Signature=5q6ajzZZrD%2BKDR%2BTshKqZ1VzFgPQGZYV%2Fzk0JI9iRYI%3D ####
+W, [2010-10-17T03:58:07.482232 #12183]  WARN -- : ##### Retry is needed, error pattern match: Internal Server Error #####
+I, [2010-10-17T03:58:07.482291 #12183]  INFO -- : Closing HTTP connection to 163.1.124.50:8773, reason: 'RightAws::AWSErrorHandler: error match to pattern 'Internal Server Error''
+W, [2010-10-17T03:58:07.482382 #12183]  WARN -- : ##### Retry #4 is being performed. Sleeping for 1.6 sec. Whole time: 1.490885 sec ####
+I, [2010-10-17T03:58:09.084526 #12183]  INFO -- : Opening new HTTP connection to 163.1.124.50:8773
+W, [2010-10-17T03:58:09.112195 #12183]  WARN -- : ##### RightAws::Ec2 returned an error: 500 Internal Server Error
+Failure: 500 Internal Server Error
+ #####
+W, [2010-10-17T03:58:09.112248 #12183]  WARN -- : ##### RightAws::Ec2 request: http://163.1.124.50:8773/services/Eucalyptus/?AWSAccessKeyId=lO9Zb05Mdg8it69sizGsGHT6Xn3tfowwPxeg&Action=DeleteTags&ResourceId.1=i-3C43067A&ResourceId.2=i-3C43067A&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key=atag&Tag.1.Value=a%20value&Tag.2.Key=atag2&Tag.2.Value=another%20value&Timestamp=2010-10-17T02%3A58%3A05.000Z&Version=2010-08-31&Signature=5q6ajzZZrD%2BKDR%2BTshKqZ1VzFgPQGZYV%2Fzk0JI9iRYI%3D ####
+W, [2010-10-17T03:58:09.112499 #12183]  WARN -- : ##### Retry is needed, error pattern match: Internal Server Error #####
+I, [2010-10-17T03:58:09.112560 #12183]  INFO -- : Closing HTTP connection to 163.1.124.50:8773, reason: 'RightAws::AWSErrorHandler: error match to pattern 'Internal Server Error''
+W, [2010-10-17T03:58:09.112697 #12183]  WARN -- : ##### Retry #5 is being performed. Sleeping for 3.2 sec. Whole time: 3.1212 sec ####
+I, [2010-10-17T03:58:12.315373 #12183]  INFO -- : Opening new HTTP connection to 163.1.124.50:8773
+W, [2010-10-17T03:58:12.343239 #12183]  WARN -- : ##### RightAws::Ec2 returned an error: 500 Internal Server Error
+Failure: 500 Internal Server Error
+ #####
+W, [2010-10-17T03:58:12.343295 #12183]  WARN -- : ##### RightAws::Ec2 request: http://163.1.124.50:8773/services/Eucalyptus/?AWSAccessKeyId=lO9Zb05Mdg8it69sizGsGHT6Xn3tfowwPxeg&Action=DeleteTags&ResourceId.1=i-3C43067A&ResourceId.2=i-3C43067A&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key=atag&Tag.1.Value=a%20value&Tag.2.Key=atag2&Tag.2.Value=another%20value&Timestamp=2010-10-17T02%3A58%3A05.000Z&Version=2010-08-31&Signature=5q6ajzZZrD%2BKDR%2BTshKqZ1VzFgPQGZYV%2Fzk0JI9iRYI%3D ####
+W, [2010-10-17T03:58:12.343472 #12183]  WARN -- : ##### Retry is needed, error pattern match: Internal Server Error #####
+I, [2010-10-17T03:58:12.343533 #12183]  INFO -- : Closing HTTP connection to 163.1.124.50:8773, reason: 'RightAws::AWSErrorHandler: error match to pattern 'Internal Server Error''
+W, [2010-10-17T03:58:12.343608 #12183]  WARN -- : ##### Ooops, time is over... ####
+I, [2010-10-17T03:58:39.277512 #12219]  INFO -- : New RightAws::Ec2 using shared connections mode
+I, [2010-10-17T03:58:39.278169 #12219]  INFO -- : Opening new HTTP connection to 163.1.124.50:8773
+W, [2010-10-17T03:58:39.355601 #12219]  WARN -- : ##### RightAws::Ec2 returned an error: 500 Internal Server Error
+Failure: 500 Internal Server Error
+ #####
+W, [2010-10-17T03:58:39.355728 #12219]  WARN -- : ##### RightAws::Ec2 request: http://163.1.124.50:8773/services/Eucalyptus/?AWSAccessKeyId=lO9Zb05Mdg8it69sizGsGHT6Xn3tfowwPxeg&Action=CreateTags&ResourceId.1=i-3C43067A&ResourceId.2=i-3C43067A&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key=atag&Tag.1.Value=a%20value&Tag.2.Key=atag2&Tag.2.Value=another%20value&Timestamp=2010-10-17T02%3A58%3A39.000Z&Version=2010-08-31&Signature=cM9KsHDascsSmmBInlq16nCLSG0MUbxeTqtVcDbtMxk%3D ####
+W, [2010-10-17T03:58:39.355915 #12219]  WARN -- : ##### Retry is needed, error pattern match: Internal Server Error #####
+I, [2010-10-17T03:58:39.355979 #12219]  INFO -- : Closing HTTP connection to 163.1.124.50:8773, reason: 'RightAws::AWSErrorHandler: error match to pattern 'Internal Server Error''
+W, [2010-10-17T03:58:39.356195 #12219]  WARN -- : ##### Retry #1 is being performed. Sleeping for 0.2 sec. Whole time: 0.000629 sec ####
+I, [2010-10-17T03:58:39.557759 #12219]  INFO -- : Opening new HTTP connection to 163.1.124.50:8773
+W, [2010-10-17T03:58:39.585132 #12219]  WARN -- : ##### RightAws::Ec2 returned an error: 500 Internal Server Error
+Failure: 500 Internal Server Error
+ #####
+W, [2010-10-17T03:58:39.585184 #12219]  WARN -- : ##### RightAws::Ec2 request: http://163.1.124.50:8773/services/Eucalyptus/?AWSAccessKeyId=lO9Zb05Mdg8it69sizGsGHT6Xn3tfowwPxeg&Action=CreateTags&ResourceId.1=i-3C43067A&ResourceId.2=i-3C43067A&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key=atag&Tag.1.Value=a%20value&Tag.2.Key=atag2&Tag.2.Value=another%20value&Timestamp=2010-10-17T02%3A58%3A39.000Z&Version=2010-08-31&Signature=cM9KsHDascsSmmBInlq16nCLSG0MUbxeTqtVcDbtMxk%3D ####
+W, [2010-10-17T03:58:39.585339 #12219]  WARN -- : ##### Retry is needed, error pattern match: Internal Server Error #####
+I, [2010-10-17T03:58:39.585458 #12219]  INFO -- : Closing HTTP connection to 163.1.124.50:8773, reason: 'RightAws::AWSErrorHandler: error match to pattern 'Internal Server Error''
+W, [2010-10-17T03:58:39.585544 #12219]  WARN -- : ##### Retry #2 is being performed. Sleeping for 0.4 sec. Whole time: 0.229987 sec ####
+I, [2010-10-17T03:58:39.987589 #12219]  INFO -- : Opening new HTTP connection to 163.1.124.50:8773
+W, [2010-10-17T03:58:40.015125 #12219]  WARN -- : ##### RightAws::Ec2 returned an error: 500 Internal Server Error
+Failure: 500 Internal Server Error
+ #####
+W, [2010-10-17T03:58:40.015180 #12219]  WARN -- : ##### RightAws::Ec2 request: http://163.1.124.50:8773/services/Eucalyptus/?AWSAccessKeyId=lO9Zb05Mdg8it69sizGsGHT6Xn3tfowwPxeg&Action=CreateTags&ResourceId.1=i-3C43067A&ResourceId.2=i-3C43067A&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key=atag&Tag.1.Value=a%20value&Tag.2.Key=atag2&Tag.2.Value=another%20value&Timestamp=2010-10-17T02%3A58%3A39.000Z&Version=2010-08-31&Signature=cM9KsHDascsSmmBInlq16nCLSG0MUbxeTqtVcDbtMxk%3D ####
+W, [2010-10-17T03:58:40.015391 #12219]  WARN -- : ##### Retry is needed, error pattern match: Internal Server Error #####
+I, [2010-10-17T03:58:40.015467 #12219]  INFO -- : Closing HTTP connection to 163.1.124.50:8773, reason: 'RightAws::AWSErrorHandler: error match to pattern 'Internal Server Error''
+W, [2010-10-17T03:58:40.015559 #12219]  WARN -- : ##### Retry #3 is being performed. Sleeping for 0.8 sec. Whole time: 0.660002 sec ####
+I, [2010-10-17T03:58:40.818204 #12219]  INFO -- : Opening new HTTP connection to 163.1.124.50:8773
+W, [2010-10-17T03:58:40.845509 #12219]  WARN -- : ##### RightAws::Ec2 returned an error: 500 Internal Server Error
+Failure: 500 Internal Server Error
+ #####
+W, [2010-10-17T03:58:40.845580 #12219]  WARN -- : ##### RightAws::Ec2 request: http://163.1.124.50:8773/services/Eucalyptus/?AWSAccessKeyId=lO9Zb05Mdg8it69sizGsGHT6Xn3tfowwPxeg&Action=CreateTags&ResourceId.1=i-3C43067A&ResourceId.2=i-3C43067A&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key=atag&Tag.1.Value=a%20value&Tag.2.Key=atag2&Tag.2.Value=another%20value&Timestamp=2010-10-17T02%3A58%3A39.000Z&Version=2010-08-31&Signature=cM9KsHDascsSmmBInlq16nCLSG0MUbxeTqtVcDbtMxk%3D ####
+W, [2010-10-17T03:58:40.845755 #12219]  WARN -- : ##### Retry is needed, error pattern match: Internal Server Error #####
+I, [2010-10-17T03:58:40.845816 #12219]  INFO -- : Closing HTTP connection to 163.1.124.50:8773, reason: 'RightAws::AWSErrorHandler: error match to pattern 'Internal Server Error''
+W, [2010-10-17T03:58:40.845915 #12219]  WARN -- : ##### Retry #4 is being performed. Sleeping for 1.6 sec. Whole time: 1.490358 sec ####
+I, [2010-10-17T03:58:42.447518 #12219]  INFO -- : Opening new HTTP connection to 163.1.124.50:8773
+W, [2010-10-17T03:58:42.475808 #12219]  WARN -- : ##### RightAws::Ec2 returned an error: 500 Internal Server Error
+Failure: 500 Internal Server Error
+ #####
+W, [2010-10-17T03:58:42.475862 #12219]  WARN -- : ##### RightAws::Ec2 request: http://163.1.124.50:8773/services/Eucalyptus/?AWSAccessKeyId=lO9Zb05Mdg8it69sizGsGHT6Xn3tfowwPxeg&Action=CreateTags&ResourceId.1=i-3C43067A&ResourceId.2=i-3C43067A&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key=atag&Tag.1.Value=a%20value&Tag.2.Key=atag2&Tag.2.Value=another%20value&Timestamp=2010-10-17T02%3A58%3A39.000Z&Version=2010-08-31&Signature=cM9KsHDascsSmmBInlq16nCLSG0MUbxeTqtVcDbtMxk%3D ####
+W, [2010-10-17T03:58:42.476070 #12219]  WARN -- : ##### Retry is needed, error pattern match: Internal Server Error #####
+I, [2010-10-17T03:58:42.476132 #12219]  INFO -- : Closing HTTP connection to 163.1.124.50:8773, reason: 'RightAws::AWSErrorHandler: error match to pattern 'Internal Server Error''
+W, [2010-10-17T03:58:42.476231 #12219]  WARN -- : ##### Retry #5 is being performed. Sleeping for 3.2 sec. Whole time: 3.120673 sec ####
+I, [2010-10-17T03:58:45.678084 #12219]  INFO -- : Opening new HTTP connection to 163.1.124.50:8773
+W, [2010-10-17T03:58:45.708632 #12219]  WARN -- : ##### RightAws::Ec2 returned an error: 500 Internal Server Error
+Failure: 500 Internal Server Error
+ #####
+W, [2010-10-17T03:58:45.708718 #12219]  WARN -- : ##### RightAws::Ec2 request: http://163.1.124.50:8773/services/Eucalyptus/?AWSAccessKeyId=lO9Zb05Mdg8it69sizGsGHT6Xn3tfowwPxeg&Action=CreateTags&ResourceId.1=i-3C43067A&ResourceId.2=i-3C43067A&SignatureMethod=HmacSHA256&SignatureVersion=2&Tag.1.Key=atag&Tag.1.Value=a%20value&Tag.2.Key=atag2&Tag.2.Value=another%20value&Timestamp=2010-10-17T02%3A58%3A39.000Z&Version=2010-08-31&Signature=cM9KsHDascsSmmBInlq16nCLSG0MUbxeTqtVcDbtMxk%3D ####
+W, [2010-10-17T03:58:45.708913 #12219]  WARN -- : ##### Retry is needed, error pattern match: Internal Server Error #####
+I, [2010-10-17T03:58:45.708976 #12219]  INFO -- : Closing HTTP connection to 163.1.124.50:8773, reason: 'RightAws::AWSErrorHandler: error match to pattern 'Internal Server Error''
+W, [2010-10-17T03:58:45.709068 #12219]  WARN -- : ##### Ooops, time is over... ####
