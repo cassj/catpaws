@@ -183,10 +183,10 @@ Capistrano::Configuration.instance(:must_exist).load do
                               })
       
       vol= ec2.create_volume(snap_id, ebs_size, zone)
-
+      `echo #{vol[:aws_id]} > VOLUMEID`
       #this doesn't yet work on Eucalyptus. Or at least, not on the 
       #version that the Oxford cloud has installed. Fine on EC2 though.
-      ec2.create_tags('CaTPAWS_tag', ebs_tag, vol[:aws_id])
+      #ec2.create_tags('CaTPAWS_tag', ebs_tag, vol[:aws_id])
     end
     
 
@@ -218,14 +218,14 @@ Capistrano::Configuration.instance(:must_exist).load do
  
     desc "attach vol_id to instance"
     task :attach, :roles => :master do
-    
       group_name        = variables[:group_name] or abort "No group_name set in config or task parameters"
       cat_group_name    = "CaTPAWS_#{group_name}"
       ec2_url           = variables[:ec2_url] or abort "no ec2_url defined"
       catpaws_logfile   = variables[:catpaws_logfile]
       vol_id            = variables[:vol_id] or abort "no vol_id defined"
-      mount_point       = variables[:mount_point] or abort "no mount point defined"
+      dev               = variables[:dev] or abort "no dev defined"
 
+	
       #create a CaTPAWS::EC2::Instances object for the group we want.
       #use no_new so we don't start new stuff if nothing is running
       instances = CaTPAWS::EC2::Instances.new(
@@ -236,16 +236,90 @@ Capistrano::Configuration.instance(:must_exist).load do
                                               :no_new            => true,
                                               :catpaws_logfile   => catpaws_logfile
                                               )
+
       if (instances.id.length>1) 
         abort "TODO - can't attach to multiple instances yet."
       end
 
       id = instances.id[0]
       ec2 = instances.ec2
-      ec2.attach_volume(vol_id, id, mount_point)
+      
+      ec2.attach_volume(vol_id, id, dev)
 
     end
-    before 'EBS:attach', 'EC2:start'
+
+    desc "format a new EBS - unneccessary if you've created it from snapshot"
+    task :format_xfs, :roles => proc{fetch :group_name} do
+       dev = variables[:dev] or abort "no dev defined"
+       run "sudo apt-get install -y xfsprogs"
+       #run "sudo modprobe xfs" #should be built into the kernel apparently
+       run "sudo mkfs.xfs #{dev}"
+    end 
+    before 'EBS:format_xfs', 'EC2:start'    
+
+
+
+    desc "mount an XFS filesystem"
+    task :mount_xfs, :roles => proc{fetch :group_name} do
+       dev = variables[:dev] or abort "no dev defined"
+       mount_point = variables[:mount_point] or abort "no mount_point defined"
+       user = variables[:ssh_options][:user]
+
+       #make an fstab entry if we don't already have one.
+       fstab = capture("cat /etc/fstab")
+	if (fstab.match(/#{dev}/) || fstab.match(/#{mount_point}/))
+          unless fstab.match(/#{dev}\s+#{mount_point}/)
+            abort "Conflicting entry in fstab, please check manually"
+          end
+       else
+          run "echo '#{dev} #{mount_point} xfs noatime 0 0' | sudo tee -a /etc/fstab"
+          run "sudo mkdir #{mount_point}"
+       end
+      
+       #check mtab to see if we're already mounted
+       mtab = capture("cat /etc/mtab")
+       if (mtab.match(/#{dev}/) || mtab.match(/#{mount_point}/))
+          unless mtab.match(/#{dev}\s+#{mount_point}/)
+            abort "Conflicting entry in mtab, please check manually"
+          end
+       else
+         run "sudo mount #{mount_point}"
+         run "sudo chown #{user} #{mount_point}"
+       end 
+
+    end
+    before "EBS:mount_xfs", 'EC2:start'
+    
+    desc "snapshot a mounted EBS volume"
+    task :snapshot, :roles => :master do
+      group_name        = variables[:group_name] or abort "No group_name set in config or task parameters"
+      cat_group_name    = "CaTPAWS_#{group_name}"
+      ec2_url           = variables[:ec2_url] or abort "no ec2_url defined"
+      catpaws_logfile   = variables[:catpaws_logfile]
+      vol_id            = variables[:vol_id] or abort "no vol_id defined"
+
+      instances = CaTPAWS::EC2::Instances.new(
+                                              :group_name        => cat_group_name,
+                                              :access_key        => aws_access_key,
+                                              :secret_access_key => aws_secret_access_key,
+                                              :ec2_url           => ec2_url,
+                                              :no_new            => true,
+                                              :catpaws_logfile   => catpaws_logfile
+                                              )
+
+
+      #probably this should snapshot all vols associated with this instance group?
+      if (instances.id.length>1)
+        abort "TODO - can't snapshot from instances yet."
+      end
+	
+      #but for now just use a pre-specified vol_id
+      ec2 = instances.ec2
+      snap = ec2.create_snapshot(vol_id) 
+      `echo #{snap[:aws_id]} > SNAPID`
+    end
+    
+
 
     desc "detach vol_id from instance"
     task :detach, :roles => :master do
@@ -275,7 +349,6 @@ Capistrano::Configuration.instance(:must_exist).load do
       ec2.detach_volume(vol_id)
 
     end
-    before 'EBS:attach', 'EC2:start'
 
 
 

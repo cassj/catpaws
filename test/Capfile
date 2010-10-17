@@ -21,7 +21,7 @@ set :aws_access_key,  ENV['AMAZON_ACCESS_KEY']
 set :aws_secret_access_key , ENV['AMAZON_SECRET_ACCESS_KEY']
 set :ec2_url, ENV['EC2_URL']
 set :ebs_zone, ENV['EBS_AVAILABILITY_ZONE']
-set :ssh_options, { :user => "ubuntu", }
+set :ssh_options, { :user => "ubuntu", :keys=>[ENV['EC2_KEYFILE']]}
 set :nhosts, 1
 
 # defaults to wherever you are when you log in (so ~/ usually)
@@ -41,7 +41,8 @@ set :group_name, 'testing'
 
 #You'll need to change this to something that exists.
 set :vol_id, 'vol-366ea65f' #ec2 eu-west-1a
-set :mount_point, '/dev/sdf'
+set :dev, '/dev/sdf'
+set :mount_point, '/data'
 
 
 
