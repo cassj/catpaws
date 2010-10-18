@@ -194,20 +194,19 @@ Capistrano::Configuration.instance(:must_exist).load do
     #presumably if they just wanted to delete an ind
     desc 'Delete EBS volume'
     task :delete, :roles => :master do
-  
       ec2_url   = variables[:ec2_url] || ec2_url or abort "no ec2_url defined"
       ec2_url   = "#{ec2_url}/" unless ec2_url[-1,1] == '/' #add a trailing slash if it doesn't have one.
-      vol_id   = variables[:vol_id] || nil 
-      catpaws_logfile    = variables[:catpaws_logfile] 
+      catpaws_logfile    = variables[:catpaws_logfile]
 
- 
-      ec2 = RightAws::Ec2.new(@access_key, @secret_access_key,
-                              { :endpoint_url => @ec2_url,
-                                :logger       => @catpaws_logfile
+
+      #get connection
+      ec2 = RightAws::Ec2.new(aws_access_key, aws_secret_access_key,
+                              { :endpoint_url => ec2_url,
+                                :logger       => catpaws_logfile
                               })
       
       ec2.delete_volume(vol_id)
-      
+      `echo "" >  VOLUMEID`      
     end
 
     desc 'Delete all volumes with a given tag'
@@ -283,13 +282,24 @@ Capistrano::Configuration.instance(:must_exist).load do
             abort "Conflicting entry in mtab, please check manually"
           end
        else
+   	 #mount your fs
          run "sudo mount #{mount_point}"
-         run "sudo chown #{user} #{mount_point}"
+         #grow your filesystem if you can 
+         run "sudo apt-get update &&  sudo apt-get install -y xfsprogs"
+         run "sudo xfs_growfs #{dev}"
+         #and give user ownership of all files
+         run "sudo chown -R #{user}:#{user} #{mount_point}"
        end 
 
     end
     before "EBS:mount_xfs", 'EC2:start'
-    
+   
+    desc "unmount a filesystem"
+    task :unmount, :roles => proc{fetch :group_name} do
+       run "sudo umount #{mount_point}"
+    end
+    before "EBS:unmount", "EC2:start"
+ 
     desc "snapshot a mounted EBS volume"
     task :snapshot, :roles => :master do
       group_name        = variables[:group_name] or abort "No group_name set in config or task parameters"
@@ -317,6 +327,7 @@ Capistrano::Configuration.instance(:must_exist).load do
       ec2 = instances.ec2
       snap = ec2.create_snapshot(vol_id) 
       `echo #{snap[:aws_id]} > SNAPID`
+	#TODO - need to wait while this is pending
     end
     
 

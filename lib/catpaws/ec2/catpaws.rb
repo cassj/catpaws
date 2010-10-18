@@ -221,9 +221,11 @@ module CaTPAWS
       
       #retrieve and parse the instances for this group
       def get_instances(incl_stopped=false)
-        
-        instances = @ec2.describe_instances.select{|x| x[:aws_groups].grep(/^@group_name$/)}
-        
+       
+	#why isn't this filtering out stuff that isn't in the group?
+        instances = @ec2.describe_instances
+        instances = instances.select { |x| x[:aws_groups].include? @group_name }
+ 
         if(instances.length == 0)
           raise CaTPAWS::EC2::Error::InstanceRetrieval, "No instances found in this group"
         end 
