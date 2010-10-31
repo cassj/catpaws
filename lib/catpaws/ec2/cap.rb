@@ -330,6 +330,36 @@ Capistrano::Configuration.instance(:must_exist).load do
 	#TODO - need to wait while this is pending
     end
     
+    desc "Delete existing snapshot"
+    task :delete_snapshot, :roles => :master do
+        if (File.exist?('SNAPID'))
+          file = File.open('SNAPID')
+          snapid = file.readline.chomp
+          if(snapid =="")
+            abort "No existing snapshot"
+          else
+            group_name        = variables[:group_name] or abort "No group_name set in config or task parameters"
+            cat_group_name    = "CaTPAWS_#{group_name}"
+            ec2_url           = variables[:ec2_url] or abort "no ec2_url defined"
+            catpaws_logfile   = variables[:catpaws_logfile]
+
+            instances = CaTPAWS::EC2::Instances.new(
+                                                :group_name        => cat_group_name,
+                                                :access_key        => aws_access_key,
+                                                :secret_access_key => aws_secret_access_key,
+                                                :ec2_url           => ec2_url,
+                                                :no_new            => true,
+                                                :catpaws_logfile   => catpaws_logfile  
+                                              )
+
+            ec2 = instances.ec2
+            ec2.delete_snapshot(snapid)
+         end
+   
+        end
+
+    end 
+   
 
 
     desc "detach vol_id from instance"
