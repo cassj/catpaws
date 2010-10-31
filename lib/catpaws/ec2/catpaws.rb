@@ -53,6 +53,7 @@ module CaTPAWS
           @working_dir       = params[:working_dir] || '.'
           @ami               = params[:ami] or raise CaTPAWS::EC2::Error::MissingParameter, 'Please provide an ami   '
           @instance_type     = params[:instance_type] or raise CaTPAWS::EC2::Error::MissingParameter, 'Please provide an instance_type'
+          @availability_zone = params[:availability_zone] or raise CaTPAWS::EC2::Error::MissingParameter, 'Please provide an availability_zone'
           @key               = params[:key] or raise  CaTPAWS::EC2::Error::MissingParameter, 'Please specify a key to use in order to gain ssh access to instances'
         end
         
@@ -74,14 +75,14 @@ module CaTPAWS
                             :cidr_ip     => @ssh_cidr_ip
                             )
 
-            @ec2.run_instances(@ami, 
-                               @nhosts,
-                               @nhosts, 
-                               [@group_name], 
-                               @key, 
-                               '',
-                               nil, 
-                               @instance_type
+            puts @availability_zone
+            @ec2.launch_instances(@ami, 
+                       	        :min_count         => @nhosts,
+                                :max_count         => @nhosts, 
+                                :group_ids         => @group_name, 
+                                :key_name          => @key, 
+                                :instance_type     => @instance_type,
+                                :availability_zone => @availability_zone
                                )
             
           rescue RightAws::AwsError => e
@@ -222,7 +223,6 @@ module CaTPAWS
       #retrieve and parse the instances for this group
       def get_instances(incl_stopped=false)
        
-	#why isn't this filtering out stuff that isn't in the group?
         instances = @ec2.describe_instances
         instances = instances.select { |x| x[:aws_groups].include? @group_name }
  

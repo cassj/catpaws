@@ -54,6 +54,7 @@ Capistrano::Configuration.instance(:must_exist).load do
       nhosts            = variables[:nhosts] || 1
       ami               = variables[:ami] or abort "No ami specified in config or task parameters' "
       instance_type     = variables[:instance_type] or abort "No instance type specified in config or task parameters'"
+      availability_zone = variables[:availability_zone] or abort "No availability_zone specified in config or task parameters"
       key               = variables[:key] or abort "No key (for ssh) specified in config or task parameters' "
       key_file          = variables[:key_file] || ''
       ssh_to_port       = variables[:ssh_to_port] || 22
@@ -69,6 +70,7 @@ Capistrano::Configuration.instance(:must_exist).load do
                                               :group_name        => cat_group_name,
                                               :group_description => group_description,
                                               :ami               => ami,
+                                              :availability_zone => availability_zone,
                                               :instance_type     => instance_type,
                                               :key               => key,
                                               :key_file          => key_file,
@@ -172,7 +174,7 @@ Capistrano::Configuration.instance(:must_exist).load do
       ebs_tag   = variables[:ebs_tag] || variables[:group_name] or abort 'ebs_tag or group_name must be set to create ebs volumes'
       ebs_size  = variables[:ebs_size] || 10
       ebs_size  = ebs_size.to_i
-      zone      = variables[:ebs_zone] or  abort 'No ebs_zone set for volume creation'
+      zone      = variables[:availability_zone] or  abort 'No availability_zone set for volume creation'
       catpaws_logfile    = variables[:catpaws_logfile] 
       
 
