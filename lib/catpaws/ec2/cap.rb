@@ -157,6 +157,102 @@ Capistrano::Configuration.instance(:must_exist).load do
     end #stop
     
 
+
+    desc "Make an AMI from this linux instances running apt."
+    task :make_linux_ami_apt, :roles => proc{fetch :group_name} do
+      if (File.exist?('AMI_ID'))
+        ami = `cat AMI_ID`.chomp
+        abort "Delete existing AMI or delete AMI_ID file first" unless ami==""
+      end
+      
+      wd = variables[:working_dir]
+      abort "Working dir must be under /mnt if you wish to create an AMI" unless wd.match(/^\/mnt.*/) 
+      instances = fetch :instances
+      abort "Cannot create AMI when there are multiple instances in this group" if instances.id.length > 1
+
+      cert = variables[:amazon_cert] or abort "No amazon_cert file specified"
+      pkey = variables[:amazon_private_key] or abort "No amazon_private_key file specified"
+      ami_bucket = variables[:ami_bucket] or abort "No ami_bucket name given"
+      amazon_account_it = variables[:amazon_account_id] or abort "No amazon_account_id given"
+      s3_location = variables[:s3_location] or abort "No S3 location given"
+
+
+      sudo "apt-get update"
+      begin
+        run "which ec2-register"
+      rescue Exception
+        sl = capture "cat /etc/apt/sources.list"
+        sl = sl.split(/\n/)
+        unless sl.any? {|s| s.match(/.*multiverse.*/)}
+          sl_uni = sl.select {|s| s.match(/.*universe*/)}
+          sl = sl.concat(sl_uni.map {|s| s.sub(/universe/, 'multiverse')   })
+          sl = sl.join("\n")
+          put(sl, "#{wd}/sources.list")
+          run "sudo cp /etc/apt/sources.list /etc/apt/sources.list.old && sudo cp #{wd}/sources.list /etc/apt/sources.list"
+          run "sudo apt-get update && sudo apt-get update" 
+        end
+        sudo "apt-get -y install ec2-ami-tools"
+      end
+      
+      upload(cert, "#{wd}/amazon-x509.pem")
+      upload(pkey, "#{wd}/amazon-pk.pem")
+      
+      #create a bucket for new instance
+      # If you're not using defaults, set up env vars like:
+      # ENV['S3_SERVER']   = "s3.amazonaws.com"
+      # ENV['S3_PORT']     = 443
+      # ENV['S3_PROTOCOL'] = "https"
+      # ENV['S3_SERVICE']  = "/"
+      # I can't get these to work as parameters to new for some reason
+      s3 = RightAws::S3.new(aws_access_key, aws_secret_access_key)
+      
+      ami_bucket = s3.bucket(ami_bucket, true, 'private', :location => s3_location)
+
+      #create your bundle
+      instance_type = variables[:instance_type]
+      ami_arch = (instance_type=="m1.small" || instance_type == "c1.medium") ? 'i386' : 'x86_64'
+
+      sudo "rm -Rf /tmp/image" #delete any previous attempts to bundle
+      sudo "ec2-bundle-vol --privatekey #{wd}/amazon-pk.pem --cert #{wd}/amazon-x509.pem --user #{amazon_account_id} --arch #{ami_arch} "
+      
+      #upload it to s3
+      run "ec2-upload-bundle -b #{ami_bucket} -m /tmp/image.manifest.xml -a #{aws_access_key} -s #{aws_secret_access_key}"
+      
+      #register the image (this is part of the api tools, not the ami tools so we can use RightAWS
+      ec2 = instances.ec2
+      ami_id = ec2.register_image("#{ami_bucket}/image.manifest.xml")
+      `cat #{ami_id} > AMI_ID`
+      
+    end
+    before 'EC2:make_linux_ami_apt', 'EC2:start'
+
+
+    
+   desc "Delete the AMI currently listed in AMI_ID"
+    task :delete_ami, :roles => proc{fetch :group_name} do
+      abort "No AMI_ID file" unless (File.exist?('AMI_ID'))
+      ami_id = `cat AMI_ID`.chomp
+      abort "AMI_ID file is empty" if ami_id==""
+
+      instances = fetch :instances
+      ec2 = instances.ec2
+
+      #deregister the image
+      ec2.deregister_image(ami_id)
+
+      #delete the bucket
+      ami_bucket = variables[:ami_bucket] or abort "No ami_bucket name given"
+      s3 = RightAws::S3.new(aws_access_key, aws_secret_access_key)
+      ami_bucket = s3.bucket(ami_bucket, false, 'private', :location => s3_location)
+      ami_bucket.delete(true)
+      
+      #delete the AMI_ID file
+      `rm AMI_ID`
+      
+    end
+    before 'EC2:delete_ami', 'EC2:start'
+    
+
   end #namespace EC2
 
   

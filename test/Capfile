@@ -19,13 +19,18 @@ require 'catpaws'
 
 set :aws_access_key,  ENV['AMAZON_ACCESS_KEY']
 set :aws_secret_access_key , ENV['AMAZON_SECRET_ACCESS_KEY']
+set :amazon_account_id, ENV['AMAZON_ACCOUNT_ID']
+
+set :amazon_cert, ENV['AMAZON_CERT']
+set :amazon_private_key, ENV['AMAZON_PRIVATE_KEY']
+
 set :ec2_url, ENV['EC2_URL']
 set :availability_zone, ENV['EC2_AVAILABILITY_ZONE']
 set :ssh_options, { :user => "ubuntu", :keys=>[ENV['EC2_KEYFILE']]}
 set :nhosts, 1
 
 # defaults to wherever you are when you log in (so ~/ usually)
-#set :working_dir, '/mnt/testing'
+set :working_dir, '/mnt/testing'
 #set :git_url, 'git@github.com:cassj/catpaws.git'
 
 # define the master node as localhost. 
@@ -44,7 +49,9 @@ set :vol_id, 'vol-366ea65f' #ec2 eu-west-1a
 set :dev, '/dev/sdf'
 set :mount_point, '/data'
 
-
+#for saving an ami
+set :ami_bucket, "catpaws-ami-test" #must be a valid s3 bucket name, no _, but - is ok
+set :s3_location, ENV['S3_LOCATION']
 
 
 
