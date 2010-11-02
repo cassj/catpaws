@@ -183,8 +183,8 @@ Capistrano::Configuration.instance(:must_exist).load do
       rescue Exception
         sl = capture "cat /etc/apt/sources.list"
         sl = sl.split(/\n/)
-        unless sl.any? {|s| s.match(/.*multiverse.*/)}
-          sl_uni = sl.select {|s| s.match(/.*universe*/)}
+        unless sl.any? {|s| s.match(/^[^#].*multiverse.*/)}
+          sl_uni = sl.select {|s| s.match(/^[^#].*universe*/)}
           sl = sl.concat(sl_uni.map {|s| s.sub(/universe/, 'multiverse')   })
           sl = sl.join("\n")
           put(sl, "#{wd}/sources.list")
