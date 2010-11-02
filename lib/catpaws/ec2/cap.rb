@@ -175,7 +175,8 @@ Capistrano::Configuration.instance(:must_exist).load do
       ami_bucket = variables[:ami_bucket] or abort "No ami_bucket name given"
       amazon_account_it = variables[:amazon_account_id] or abort "No amazon_account_id given"
       s3_location = variables[:s3_location] or abort "No S3 location given"
-
+      ami_build_dir = variables[:ami_build_dir] || '/tmp'
+      sudo "mkdir -p #{ami_build_dir}"
 
       sudo "apt-get update"
       begin
@@ -213,10 +214,10 @@ Capistrano::Configuration.instance(:must_exist).load do
       ami_arch = (instance_type=="m1.small" || instance_type == "c1.medium") ? 'i386' : 'x86_64'
 
       sudo "rm -Rf /tmp/image" #delete any previous attempts to bundle
-      sudo "ec2-bundle-vol --privatekey #{wd}/amazon-pk.pem --cert #{wd}/amazon-x509.pem --user #{amazon_account_id} --arch #{ami_arch} "
+      sudo "ec2-bundle-vol --privatekey #{wd}/amazon-pk.pem --cert #{wd}/amazon-x509.pem --user #{amazon_account_id} --arch #{ami_arch} --destination #{ami_build_dir}"
       
       #upload it to s3
-      run "ec2-upload-bundle -b #{ami_bucket} -m /tmp/image.manifest.xml -a #{aws_access_key} -s #{aws_secret_access_key}"
+      run "ec2-upload-bundle -b #{ami_bucket} -m #{ami_build_dir}/image.manifest.xml -a #{aws_access_key} -s #{aws_secret_access_key}"
       
       #register the image (this is part of the api tools, not the ami tools so we can use RightAWS
       ec2 = instances.ec2
