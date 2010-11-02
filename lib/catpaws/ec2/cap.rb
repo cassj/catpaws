@@ -176,7 +176,11 @@ Capistrano::Configuration.instance(:must_exist).load do
       amazon_account_it = variables[:amazon_account_id] or abort "No amazon_account_id given"
       s3_location = variables[:s3_location] or abort "No S3 location given"
       ami_build_dir = variables[:ami_build_dir] || '/tmp'
-      sudo "mkdir -p #{ami_build_dir}"
+      begin
+        run("[ -d #{ami_build_dir} ]")
+      rescue Exception
+        abort "ami_build_dir does not exist. Have you forgotten to mount your EBS volume?"
+      end
 
       sudo "apt-get update"
       begin
