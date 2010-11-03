@@ -223,16 +223,25 @@ Capistrano::Configuration.instance(:must_exist).load do
       #upload it to s3
       run "ec2-upload-bundle -b #{ami_bucket} -m #{ami_build_dir}/image.manifest.xml -a #{aws_access_key} -s #{aws_secret_access_key}"
       
-      #register the image (this is part of the api tools, not the ami tools so we can use RightAWS
-      ec2 = instances.ec2
-      ami_id = ec2.register_image("#{ami_bucket}/image.manifest.xml")
-      `cat #{ami_id} > AMI_ID`
       
     end
     before 'EC2:make_linux_ami_apt', 'EC2:start'
 
 
-    
+    desc "register the new image"
+    task :register_ami, :roles => proc{fetch :group_name} do
+      ami_bucket = variables[:ami_bucket] or abort "No ami_bucket name given"
+      instances = fetch :instances
+      ec2 = instances.ec2
+      puts "#{ami_bucket}/image.manifest.xml"
+      ami_id = ec2.register_image("#{ami_bucket}/image.manifest.xml")
+      `echo #{ami_id} > AMI_ID`
+     end
+     before 'EC2:register_ami','EC2:start'
+ 
+
+
+   
    desc "Delete the AMI currently listed in AMI_ID"
     task :delete_ami, :roles => proc{fetch :group_name} do
       abort "No AMI_ID file" unless (File.exist?('AMI_ID'))
@@ -457,6 +466,8 @@ Capistrano::Configuration.instance(:must_exist).load do
 
             ec2 = instances.ec2
             ec2.delete_snapshot(snapid)
+            #and delete the SNAPID file
+            file.delete
          end
    
         end
