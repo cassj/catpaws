@@ -1,7 +1,9 @@
 = catpaws
 
 Goal: Define your required AWS/Eucalyptus configuration in a 
-conifg file and have it created by EC2:stop.  
+conifg file and have it created by EC2:start, stopped by
+EC2:stop. Create, use, snapshot and destroy EBS vols as 
+required.
 
 create tasks that can be run on AWS in a Rake / Capistrano style
 task file. Need better support for running and monitoring long-running
