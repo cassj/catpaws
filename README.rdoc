@@ -1,54 +1,46 @@
 = catpaws
 
-CApistrano Tasks Providing AWS
+Goal: Define your required AWS/Eucalyptus configuration in a 
+conifg file and have it created by EC2:stop.  
 
-I'm using Capistrano to manage remote machines when running data analysis workflows. 
-This isn't quite what Capistrano was designed for, so it's all a bit hacky.
+create tasks that can be run on AWS in a Rake / Capistrano style
+task file. Need better support for running and monitoring long-running
+tasks. Need a more expressive approach to defining a task's
+pre-reqs. 
 
 
-== EC2
+== EC2 / EBS
 
 Built on top of the right_aws gem.
 
-Currently provides EC2:start and EC2:stop tasks and little else
+At the moment, consists of a class to map EC2 instances by 
+security groups to Capistrano roles and provides tasks:
 
-Lets you start multiple instances and maps EC2 security groups to 
-Capistrano roles.
+EC2:start
+EC2:stop
 
-Plan to add tasks for packaging up servers to amis  etc
+EC2:make_linux_ami_apt
+EC2:register_ami
+EC2:delete_ami
 
+EBS:create
+EBS:attach
+EBS:format_xfs
+EBS:mount_xfs
+EBS:snapshot
+EBS:unmount
+EBS:delete
+EBS:delete_snapshot
 
-
-== Example Capfile
-
- require 'catpaws'
-
- set :aws_access_key,  ENV['AMAZON_ACCESS_KEY']
- set :aws_secret_access_key , ENV['AMAZON_SECRET_ACCESS_KEY']
- set :ec2_url, ENV['EC2_URL']
- set :ssh_options, { 
-                    :keys => [ENV['EC2_KEYFILE']],
-                    :user => "ubuntu" }
- set :sudo_password, ''
- set :nhosts, 3 
- set :working_dir, '/mnt/testing'
-
- set :key, ENV['EC2_KEY']
- set :key_file, ENV['EC2_KEYFILE']
- set :ami, 'ami-cf4d67bb' 
- set :instance_type, 'm1.small'
- set :group_name, 'testing'
-
- desc "setup apt on all instances"
- task :apt_setup, :roles => group_name do
-   sudo "apt-get update"
-   sudo "apt-get install -y build_essential"  
- end 
- before 'apt_setup', 'EC2:start' 
 
 == Installation
 
-You will need an AWS EC2 account - see http://aws.amazon.com/ec2/ (or compatible cloud infrastructure,  it should work on Eucalyptus)
+This is really a reminder to myself. I wouldn't recommend using this yet. I'll probably 
+chuck it all away and start again once I've got a clearer idea of what I want it to do.
+
+
+You will need an AWS EC2 account - see http://aws.amazon.com/ec2/ (or compatible cloud infrastructure,  
+it seems to be ok on Eucalyptus)
   
 Make sure you have create an ssh key in order to access your instances
 
@@ -87,7 +79,6 @@ following testing variables set to appropriate values:
  export CATPAWS_TEST_USER='ubuntu'
 
 
-
 Finally, set the following environment variables appropriately
 for your AWS account:
 
@@ -98,7 +89,3 @@ for your AWS account:
  EC2_KEYFILE ( the location of the key file. Alternatively, you can use ssh-agent )
  
 
-
-== Copyright
-
-Copyright (c) 2010 cassj. See LICENSE for details.

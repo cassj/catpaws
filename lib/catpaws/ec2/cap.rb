@@ -467,7 +467,7 @@ Capistrano::Configuration.instance(:must_exist).load do
             ec2 = instances.ec2
             ec2.delete_snapshot(snapid)
             #and delete the SNAPID file
-            file.delete
+            file.unlink
          end
    
         end
